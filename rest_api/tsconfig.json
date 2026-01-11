@@ -1,0 +1,16 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2023",
+    "strict": true,
+     "moduleResolution": "node",
+     "allowSyntheticDefaultImports": true,
+     "esModuleInterop": true,
+     "allowImportingTsExtensions": true,
+     "noEmit": true,
+      "ignoreDeprecations": "6.0"
+     
+  }
+}
+
