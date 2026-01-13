@@ -4,13 +4,15 @@
     "module": "ESNext",
     "target": "ES2023",
     "strict": true,
-     "moduleResolution": "node",
+     "moduleResolution":"bundler",
+     "skipLibCheck": true,
      "allowSyntheticDefaultImports": true,
      "esModuleInterop": true,
      "allowImportingTsExtensions": true,
      "noEmit": true,
-      "ignoreDeprecations": "6.0"
-     
-  }
+      "ignoreDeprecations": "6.0",
+      "types": ["vitest/globals"]
+  },
+  "include": ["src/**/*", "test/**/*"]
 }
 

@@ -1,12 +1,19 @@
-import { hashPassword, verifyPassword } from "../utils/passwords";
-import { generateToken } from "../utils/jwt";
+import { hashPassword, verifyPassword } from "../utils/passwords.ts";
+import { generateToken } from "../utils/jwt.ts";
 import type { Request, Response } from "express";
-import { prisma } from "../config/prisma";
+import { prisma } from "../config/prisma.ts";
 
 
 export async function signup(req: Request, res: Response) {
     try {
-        const { username, email, password, firstname, lastname } = await req.body();
+        const { username, email, password, firstname, lastname } = await req.body;
+        // deos any user exits with these details
+        const existingUser = await prisma.user.findFirst({
+            where: { email: email }
+        })
+        if (existingUser) {
+           return  res.status(404).json({ message: 'Invalid credentials'})
+        }
         // hash password
         const hashedPassword = await hashPassword(password);
         // insert into db 
@@ -39,7 +46,7 @@ export async function signup(req: Request, res: Response) {
 
 export async function login(req: Request, res: Response) {
     try {
-        const { email, password } = await req.body();
+        const { email, password } = await req.body;
         // verify user
         const user = await prisma.user.findFirst({
             where: { email: email }

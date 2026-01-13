@@ -1,16 +1,21 @@
 import { Router } from 'express';
-import { validateData } from '../middlewares/validateData.ts';
-import { createHabbitSchema } from '../types/zodSchemas.ts';
-import { z } from 'zod'
+import { validateBody, validateParams } from '../middlewares/validateData.ts';
+import { createHabbitSchema, updateHabitSchema, paramSchema } from '../types/zodSchemas.ts';
+import { authenticateToken } from '../middlewares/authenticate.ts';
+import { createHabit, updateHabit, deleteHabit,getHabits } from '../controllers/habitController.ts';
 
-const habbitRoutes = Router();
 
+const habitRouter = Router();
+//apply authentication to all habit routes
+habitRouter.use(authenticateToken);
 
 // create routes 
-habbitRoutes.post('/', validateData(createHabbitSchema),  (req, res) => {
-   return  res.status(200).json({ message: " All habbits" });
-});
+habitRouter.post('/',  validateBody(createHabbitSchema), createHabit);
+//update
+habitRouter.patch('/:id',validateParams(paramSchema), validateBody(updateHabitSchema), updateHabit);
+// delete habbit 
+habitRouter.delete('/:id', validateParams(paramSchema), deleteHabit);
+habitRouter.get('/', getHabits);
 
 
-
-export default habbitRoutes ;
+export default habitRouter ;

@@ -2,11 +2,11 @@ import type { Request, Response, NextFunction } from "express";
 import z, { ZodError, ZodType } from "zod";
 
 // data validation middleware
-export const validateData = (schema: ZodType) => {
+export const validateBody = (schema: ZodType) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
       const validatedData = schema.parse(req.body);
-      req.body = validateData;
+      req.body = validatedData;
       // next function
       next();
     } catch (error) {

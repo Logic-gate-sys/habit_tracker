@@ -1,21 +1,34 @@
-import { xContentTypeOptions } from 'helmet';
 import { z } from 'zod';
-
 
 // Habbit schemas 
 export const createHabbitSchema = z.object({
-    userId: z.string().min(12),
-    title: z.string().min(15),
-    type: z.enum(["bad", "good"]).default("good")
+    name: z.string().min(5),
+    description: z.string().min(30),
+    frequency: z.enum(['DAILY', 'WEEKLY', 'MONTHLY']),
+    targetCount: z.coerce.number(),
+    tagName: z.string().min(5).optional,
+    color:z.string().min(5).optional
 });
 
 export const createUserSchema = z.object({
     email: z.string().email('Not a valid email'),
     username: z.string().min(5),
-    password: z.string().min(12),
+    password: z.string().min(12)
 });
 
 export const loginSchema = z.object({
     email: z.string().email('Not a valid email'),
     password: z.string().min(12),
+})
+
+export const updateHabitSchema = z.object({
+    name: z.string().min(5).optional(),
+    description: z.string().min(30).optional(),
+    frequency: z.enum(['DAILY', 'WEEKLY', 'MONTHLY']).optional(),
+    targetCount: z.coerce.number().optional(),
+    isActive: z.boolean().optional(),
+})
+
+export const paramSchema = z.object({
+    id: z.string()
 })

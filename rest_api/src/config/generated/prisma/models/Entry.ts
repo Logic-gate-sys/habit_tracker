@@ -403,6 +403,14 @@ export type EntryUncheckedUpdateManyWithoutHabitNestedInput = {
   deleteMany?: Prisma.EntryScalarWhereInput | Prisma.EntryScalarWhereInput[]
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type EntryCreateWithoutHabitInput = {
   id?: string
   completion: number

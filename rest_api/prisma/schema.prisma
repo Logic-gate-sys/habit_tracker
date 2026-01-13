@@ -40,7 +40,7 @@ model Habit {
   name        String
   description String?
   frequency   HabitFrequency
-  targetCount Int
+  targetCount Int?
   isActive    Boolean        @default(true)
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
@@ -58,7 +58,6 @@ model Entry {
   createdAt  DateTime @default(now())
 
   habit      Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
-
   @@index([habitId])
 }
 
@@ -73,14 +72,14 @@ model Tag {
 }
 
 model HabitTag {
-  id        String   @id @default(cuid())
-  habitId  String
-  tagId    String
-  createdAt DateTime @default(now())
+  id           String   @id @default(cuid())
+  habitId      String
+  tagId        String
+  createdAt    DateTime @default(now())
+
 
   habit    Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
   tag      Tag   @relation(fields: [tagId], references: [id], onDelete: Cascade)
-
   @@unique([habitId, tagId])
   @@index([habitId])
   @@index([tagId])
