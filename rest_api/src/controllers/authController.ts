@@ -19,23 +19,25 @@ export async function signup(req: Request, res: Response) {
         // insert into db 
         const newUser = await prisma.user.create({
             data: {
-                username: username,
+                user_name: username,
                 email: email,
                 password: hashedPassword,
-                firstName: firstname ?? '',
-                lastName: lastname??''
+                first_name: firstname ?? '',
+                last_name: lastname??''
             }
         });
+       const token = await generateToken({ id: newUser?.id, username: newUser?.user_name, email: newUser?.email });
 
         return res.status(201).json({
             success: true,
             message: 'User Signup Successful',
             user: {
                 id: newUser?.id,
-                username: newUser?.username,
+                user_name: newUser?.user_name,
                 email: newUser?.email,
-                createdAt: newUser?.createdAt
-            }
+                created_at: newUser?.created_at
+            },
+            token
         })
     } catch (error) {
         console.error('error', error);
@@ -61,15 +63,15 @@ export async function login(req: Request, res: Response) {
         }
         
         // generate token and send to user
-        const token = await generateToken({ id: user?.id, username: user?.username, email: user?.email });
+        const token = await generateToken({ id: user?.id, username: user?.user_name, email: user?.email });
         return res.status(200).json({
             success: true,
-            message: 'Login successful',
+            message: 'Login Successful',
             user: {
                 id: user?.id,
-                username: user?.username,
+                username: user?.user_name,
                 email: user?.email,
-                logedinAt: user?.createdAt
+                logedinAt: user?.created_at
             },
             token: token
         });

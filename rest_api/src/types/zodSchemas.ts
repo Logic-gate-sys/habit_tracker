@@ -1,5 +1,12 @@
 import { z } from 'zod';
 
+// entry schema
+export const createEntrySchema = z.object({
+    habitId: z.string().min(7),
+    completion: z.coerce.number(),
+    note: z.string().min(10)
+})
+
 // Habbit schemas 
 export const createHabbitSchema = z.object({
     name: z.string().min(5),
@@ -32,3 +39,4 @@ export const updateHabitSchema = z.object({
 export const paramSchema = z.object({
     id: z.string()
 })
+

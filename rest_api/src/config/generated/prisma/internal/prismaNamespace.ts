@@ -820,12 +820,12 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  username: 'username',
+  user_name: 'user_name',
   password: 'password',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  first_name: 'first_name',
+  last_name: 'last_name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -833,14 +833,14 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const HabitScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  user_id: 'user_id',
   name: 'name',
   description: 'description',
   frequency: 'frequency',
-  targetCount: 'targetCount',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  target_count: 'target_count',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type HabitScalarFieldEnum = (typeof HabitScalarFieldEnum)[keyof typeof HabitScalarFieldEnum]
@@ -848,10 +848,10 @@ export type HabitScalarFieldEnum = (typeof HabitScalarFieldEnum)[keyof typeof Ha
 
 export const EntryScalarFieldEnum = {
   id: 'id',
-  habitId: 'habitId',
+  habit_id: 'habit_id',
   completion: 'completion',
   note: 'note',
-  createdAt: 'createdAt'
+  created_at: 'created_at'
 } as const
 
 export type EntryScalarFieldEnum = (typeof EntryScalarFieldEnum)[keyof typeof EntryScalarFieldEnum]
@@ -861,8 +861,8 @@ export const TagScalarFieldEnum = {
   id: 'id',
   name: 'name',
   color: 'color',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
@@ -870,9 +870,9 @@ export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagSca
 
 export const HabitTagScalarFieldEnum = {
   id: 'id',
-  habitId: 'habitId',
-  tagId: 'tagId',
-  createdAt: 'createdAt'
+  habit_id: 'habit_id',
+  tag_id: 'tag_id',
+  created_id: 'created_id'
 } as const
 
 export type HabitTagScalarFieldEnum = (typeof HabitTagScalarFieldEnum)[keyof typeof HabitTagScalarFieldEnum]

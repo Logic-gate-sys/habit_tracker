@@ -9,13 +9,16 @@ const habitRouter = Router();
 //apply authentication to all habit routes
 habitRouter.use(authenticateToken);
 
+
 // create routes 
-habitRouter.post('/',  validateBody(createHabbitSchema), createHabit);
+habitRouter.post('/new', validateBody(createHabbitSchema), createHabit);
+// fetch all user habbits
+habitRouter.get('/', getHabits);
 //update
 habitRouter.patch('/:id',validateParams(paramSchema), validateBody(updateHabitSchema), updateHabit);
 // delete habbit 
 habitRouter.delete('/:id', validateParams(paramSchema), deleteHabit);
-habitRouter.get('/', getHabits);
 
 
-export default habitRouter ;
+export { habitRouter };
+export default habitRouter;

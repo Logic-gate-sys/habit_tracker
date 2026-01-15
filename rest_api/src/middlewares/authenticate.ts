@@ -20,6 +20,6 @@ export const  authenticateToken = async(req: AuthRequest, res: Response, next: N
         // next 
         next();
     } catch (err) {
-        return res.status(409).json({message:'Forbidden'})
+        return res.status(409).json({ message: 'Forbidden' });
     }
 }

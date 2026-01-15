@@ -26,46 +26,46 @@ export type AggregateHabitTag = {
 
 export type HabitTagMinAggregateOutputType = {
   id: string | null
-  habitId: string | null
-  tagId: string | null
-  createdAt: Date | null
+  habit_id: string | null
+  tag_id: string | null
+  created_id: Date | null
 }
 
 export type HabitTagMaxAggregateOutputType = {
   id: string | null
-  habitId: string | null
-  tagId: string | null
-  createdAt: Date | null
+  habit_id: string | null
+  tag_id: string | null
+  created_id: Date | null
 }
 
 export type HabitTagCountAggregateOutputType = {
   id: number
-  habitId: number
-  tagId: number
-  createdAt: number
+  habit_id: number
+  tag_id: number
+  created_id: number
   _all: number
 }
 
 
 export type HabitTagMinAggregateInputType = {
   id?: true
-  habitId?: true
-  tagId?: true
-  createdAt?: true
+  habit_id?: true
+  tag_id?: true
+  created_id?: true
 }
 
 export type HabitTagMaxAggregateInputType = {
   id?: true
-  habitId?: true
-  tagId?: true
-  createdAt?: true
+  habit_id?: true
+  tag_id?: true
+  created_id?: true
 }
 
 export type HabitTagCountAggregateInputType = {
   id?: true
-  habitId?: true
-  tagId?: true
-  createdAt?: true
+  habit_id?: true
+  tag_id?: true
+  created_id?: true
   _all?: true
 }
 
@@ -143,9 +143,9 @@ export type HabitTagGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type HabitTagGroupByOutputType = {
   id: string
-  habitId: string
-  tagId: string
-  createdAt: Date
+  habit_id: string
+  tag_id: string
+  created_id: Date
   _count: HabitTagCountAggregateOutputType | null
   _min: HabitTagMinAggregateOutputType | null
   _max: HabitTagMaxAggregateOutputType | null
@@ -171,40 +171,40 @@ export type HabitTagWhereInput = {
   OR?: Prisma.HabitTagWhereInput[]
   NOT?: Prisma.HabitTagWhereInput | Prisma.HabitTagWhereInput[]
   id?: Prisma.StringFilter<"HabitTag"> | string
-  habitId?: Prisma.StringFilter<"HabitTag"> | string
-  tagId?: Prisma.StringFilter<"HabitTag"> | string
-  createdAt?: Prisma.DateTimeFilter<"HabitTag"> | Date | string
+  habit_id?: Prisma.StringFilter<"HabitTag"> | string
+  tag_id?: Prisma.StringFilter<"HabitTag"> | string
+  created_id?: Prisma.DateTimeFilter<"HabitTag"> | Date | string
   habit?: Prisma.XOR<Prisma.HabitScalarRelationFilter, Prisma.HabitWhereInput>
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
 }
 
 export type HabitTagOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
-  tagId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
+  tag_id?: Prisma.SortOrder
+  created_id?: Prisma.SortOrder
   habit?: Prisma.HabitOrderByWithRelationInput
   tag?: Prisma.TagOrderByWithRelationInput
 }
 
 export type HabitTagWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  habitId_tagId?: Prisma.HabitTagHabitIdTagIdCompoundUniqueInput
+  habit_id_tag_id?: Prisma.HabitTagHabit_idTag_idCompoundUniqueInput
   AND?: Prisma.HabitTagWhereInput | Prisma.HabitTagWhereInput[]
   OR?: Prisma.HabitTagWhereInput[]
   NOT?: Prisma.HabitTagWhereInput | Prisma.HabitTagWhereInput[]
-  habitId?: Prisma.StringFilter<"HabitTag"> | string
-  tagId?: Prisma.StringFilter<"HabitTag"> | string
-  createdAt?: Prisma.DateTimeFilter<"HabitTag"> | Date | string
+  habit_id?: Prisma.StringFilter<"HabitTag"> | string
+  tag_id?: Prisma.StringFilter<"HabitTag"> | string
+  created_id?: Prisma.DateTimeFilter<"HabitTag"> | Date | string
   habit?: Prisma.XOR<Prisma.HabitScalarRelationFilter, Prisma.HabitWhereInput>
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
-}, "id" | "habitId_tagId">
+}, "id" | "habit_id_tag_id">
 
 export type HabitTagOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
-  tagId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
+  tag_id?: Prisma.SortOrder
+  created_id?: Prisma.SortOrder
   _count?: Prisma.HabitTagCountOrderByAggregateInput
   _max?: Prisma.HabitTagMaxOrderByAggregateInput
   _min?: Prisma.HabitTagMinOrderByAggregateInput
@@ -215,56 +215,56 @@ export type HabitTagScalarWhereWithAggregatesInput = {
   OR?: Prisma.HabitTagScalarWhereWithAggregatesInput[]
   NOT?: Prisma.HabitTagScalarWhereWithAggregatesInput | Prisma.HabitTagScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"HabitTag"> | string
-  habitId?: Prisma.StringWithAggregatesFilter<"HabitTag"> | string
-  tagId?: Prisma.StringWithAggregatesFilter<"HabitTag"> | string
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"HabitTag"> | Date | string
+  habit_id?: Prisma.StringWithAggregatesFilter<"HabitTag"> | string
+  tag_id?: Prisma.StringWithAggregatesFilter<"HabitTag"> | string
+  created_id?: Prisma.DateTimeWithAggregatesFilter<"HabitTag"> | Date | string
 }
 
 export type HabitTagCreateInput = {
   id?: string
-  createdAt?: Date | string
+  created_id?: Date | string
   habit: Prisma.HabitCreateNestedOneWithoutTagsInput
   tag: Prisma.TagCreateNestedOneWithoutHabitsInput
 }
 
 export type HabitTagUncheckedCreateInput = {
   id?: string
-  habitId: string
-  tagId: string
-  createdAt?: Date | string
+  habit_id: string
+  tag_id: string
+  created_id?: Date | string
 }
 
 export type HabitTagUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   habit?: Prisma.HabitUpdateOneRequiredWithoutTagsNestedInput
   tag?: Prisma.TagUpdateOneRequiredWithoutHabitsNestedInput
 }
 
 export type HabitTagUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  habitId?: Prisma.StringFieldUpdateOperationsInput | string
-  tagId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  habit_id?: Prisma.StringFieldUpdateOperationsInput | string
+  tag_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabitTagCreateManyInput = {
   id?: string
-  habitId: string
-  tagId: string
-  createdAt?: Date | string
+  habit_id: string
+  tag_id: string
+  created_id?: Date | string
 }
 
 export type HabitTagUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabitTagUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  habitId?: Prisma.StringFieldUpdateOperationsInput | string
-  tagId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  habit_id?: Prisma.StringFieldUpdateOperationsInput | string
+  tag_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabitTagListRelationFilter = {
@@ -277,30 +277,30 @@ export type HabitTagOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type HabitTagHabitIdTagIdCompoundUniqueInput = {
-  habitId: string
-  tagId: string
+export type HabitTagHabit_idTag_idCompoundUniqueInput = {
+  habit_id: string
+  tag_id: string
 }
 
 export type HabitTagCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
-  tagId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
+  tag_id?: Prisma.SortOrder
+  created_id?: Prisma.SortOrder
 }
 
 export type HabitTagMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
-  tagId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
+  tag_id?: Prisma.SortOrder
+  created_id?: Prisma.SortOrder
 }
 
 export type HabitTagMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
-  tagId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
+  tag_id?: Prisma.SortOrder
+  created_id?: Prisma.SortOrder
 }
 
 export type HabitTagCreateNestedManyWithoutHabitInput = {
@@ -389,14 +389,14 @@ export type HabitTagUncheckedUpdateManyWithoutTagNestedInput = {
 
 export type HabitTagCreateWithoutHabitInput = {
   id?: string
-  createdAt?: Date | string
+  created_id?: Date | string
   tag: Prisma.TagCreateNestedOneWithoutHabitsInput
 }
 
 export type HabitTagUncheckedCreateWithoutHabitInput = {
   id?: string
-  tagId: string
-  createdAt?: Date | string
+  tag_id: string
+  created_id?: Date | string
 }
 
 export type HabitTagCreateOrConnectWithoutHabitInput = {
@@ -430,21 +430,21 @@ export type HabitTagScalarWhereInput = {
   OR?: Prisma.HabitTagScalarWhereInput[]
   NOT?: Prisma.HabitTagScalarWhereInput | Prisma.HabitTagScalarWhereInput[]
   id?: Prisma.StringFilter<"HabitTag"> | string
-  habitId?: Prisma.StringFilter<"HabitTag"> | string
-  tagId?: Prisma.StringFilter<"HabitTag"> | string
-  createdAt?: Prisma.DateTimeFilter<"HabitTag"> | Date | string
+  habit_id?: Prisma.StringFilter<"HabitTag"> | string
+  tag_id?: Prisma.StringFilter<"HabitTag"> | string
+  created_id?: Prisma.DateTimeFilter<"HabitTag"> | Date | string
 }
 
 export type HabitTagCreateWithoutTagInput = {
   id?: string
-  createdAt?: Date | string
+  created_id?: Date | string
   habit: Prisma.HabitCreateNestedOneWithoutTagsInput
 }
 
 export type HabitTagUncheckedCreateWithoutTagInput = {
   id?: string
-  habitId: string
-  createdAt?: Date | string
+  habit_id: string
+  created_id?: Date | string
 }
 
 export type HabitTagCreateOrConnectWithoutTagInput = {
@@ -475,89 +475,89 @@ export type HabitTagUpdateManyWithWhereWithoutTagInput = {
 
 export type HabitTagCreateManyHabitInput = {
   id?: string
-  tagId: string
-  createdAt?: Date | string
+  tag_id: string
+  created_id?: Date | string
 }
 
 export type HabitTagUpdateWithoutHabitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tag?: Prisma.TagUpdateOneRequiredWithoutHabitsNestedInput
 }
 
 export type HabitTagUncheckedUpdateWithoutHabitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  tagId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tag_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabitTagUncheckedUpdateManyWithoutHabitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  tagId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tag_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabitTagCreateManyTagInput = {
   id?: string
-  habitId: string
-  createdAt?: Date | string
+  habit_id: string
+  created_id?: Date | string
 }
 
 export type HabitTagUpdateWithoutTagInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   habit?: Prisma.HabitUpdateOneRequiredWithoutTagsNestedInput
 }
 
 export type HabitTagUncheckedUpdateWithoutTagInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  habitId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  habit_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabitTagUncheckedUpdateManyWithoutTagInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  habitId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  habit_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_id?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type HabitTagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  habitId?: boolean
-  tagId?: boolean
-  createdAt?: boolean
+  habit_id?: boolean
+  tag_id?: boolean
+  created_id?: boolean
   habit?: boolean | Prisma.HabitDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["habitTag"]>
 
 export type HabitTagSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  habitId?: boolean
-  tagId?: boolean
-  createdAt?: boolean
+  habit_id?: boolean
+  tag_id?: boolean
+  created_id?: boolean
   habit?: boolean | Prisma.HabitDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["habitTag"]>
 
 export type HabitTagSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  habitId?: boolean
-  tagId?: boolean
-  createdAt?: boolean
+  habit_id?: boolean
+  tag_id?: boolean
+  created_id?: boolean
   habit?: boolean | Prisma.HabitDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["habitTag"]>
 
 export type HabitTagSelectScalar = {
   id?: boolean
-  habitId?: boolean
-  tagId?: boolean
-  createdAt?: boolean
+  habit_id?: boolean
+  tag_id?: boolean
+  created_id?: boolean
 }
 
-export type HabitTagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "habitId" | "tagId" | "createdAt", ExtArgs["result"]["habitTag"]>
+export type HabitTagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "habit_id" | "tag_id" | "created_id", ExtArgs["result"]["habitTag"]>
 export type HabitTagInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   habit?: boolean | Prisma.HabitDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
@@ -579,9 +579,9 @@ export type $HabitTagPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    habitId: string
-    tagId: string
-    createdAt: Date
+    habit_id: string
+    tag_id: string
+    created_id: Date
   }, ExtArgs["result"]["habitTag"]>
   composites: {}
 }
@@ -1008,9 +1008,9 @@ export interface Prisma__HabitTagClient<T, Null = never, ExtArgs extends runtime
  */
 export interface HabitTagFieldRefs {
   readonly id: Prisma.FieldRef<"HabitTag", 'String'>
-  readonly habitId: Prisma.FieldRef<"HabitTag", 'String'>
-  readonly tagId: Prisma.FieldRef<"HabitTag", 'String'>
-  readonly createdAt: Prisma.FieldRef<"HabitTag", 'DateTime'>
+  readonly habit_id: Prisma.FieldRef<"HabitTag", 'String'>
+  readonly tag_id: Prisma.FieldRef<"HabitTag", 'String'>
+  readonly created_id: Prisma.FieldRef<"HabitTag", 'DateTime'>
 }
     
 

@@ -3,9 +3,12 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet  from 'helmet';
 import { authRouter } from './routes/authRoutes.ts';
-import habbitRoutes from './routes/habbitRoutes.ts';
+import { habitRouter } from './routes/habitRoutes.ts';
+import { entryRouter } from './routes/entryRoutes.ts'
 import { isTest } from '../env.ts';
-import { errorHandler, APIError, notFoundError } from './middlewares/errorHandler.ts';
+import { errorHandler, notFoundError } from './middlewares/errorHandler.ts';
+
+
 
 const app = express();
 // global middlewares 
@@ -24,13 +27,13 @@ app.use('/health', (req, res) => {
 })
 
 // habbit router mounts
-app.use('/api/habits', habbitRoutes);
+app.use('/api/habits', habitRouter);
 // auth
 app.use('/api/auth', authRouter)
-
-// error handler 
-app.use(errorHandler);
+app.use('/api/entries', entryRouter)
+// error handlers
 app.use(notFoundError);
+app.use(errorHandler);
 
 export { app }; 
 export default app;

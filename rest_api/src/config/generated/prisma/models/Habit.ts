@@ -27,93 +27,93 @@ export type AggregateHabit = {
 }
 
 export type HabitAvgAggregateOutputType = {
-  targetCount: number | null
+  target_count: number | null
 }
 
 export type HabitSumAggregateOutputType = {
-  targetCount: number | null
+  target_count: number | null
 }
 
 export type HabitMinAggregateOutputType = {
   id: string | null
-  userId: string | null
+  user_id: string | null
   name: string | null
   description: string | null
   frequency: $Enums.HabitFrequency | null
-  targetCount: number | null
-  isActive: boolean | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  target_count: number | null
+  is_active: boolean | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type HabitMaxAggregateOutputType = {
   id: string | null
-  userId: string | null
+  user_id: string | null
   name: string | null
   description: string | null
   frequency: $Enums.HabitFrequency | null
-  targetCount: number | null
-  isActive: boolean | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  target_count: number | null
+  is_active: boolean | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type HabitCountAggregateOutputType = {
   id: number
-  userId: number
+  user_id: number
   name: number
   description: number
   frequency: number
-  targetCount: number
-  isActive: number
-  createdAt: number
-  updatedAt: number
+  target_count: number
+  is_active: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
 export type HabitAvgAggregateInputType = {
-  targetCount?: true
+  target_count?: true
 }
 
 export type HabitSumAggregateInputType = {
-  targetCount?: true
+  target_count?: true
 }
 
 export type HabitMinAggregateInputType = {
   id?: true
-  userId?: true
+  user_id?: true
   name?: true
   description?: true
   frequency?: true
-  targetCount?: true
-  isActive?: true
-  createdAt?: true
-  updatedAt?: true
+  target_count?: true
+  is_active?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type HabitMaxAggregateInputType = {
   id?: true
-  userId?: true
+  user_id?: true
   name?: true
   description?: true
   frequency?: true
-  targetCount?: true
-  isActive?: true
-  createdAt?: true
-  updatedAt?: true
+  target_count?: true
+  is_active?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type HabitCountAggregateInputType = {
   id?: true
-  userId?: true
+  user_id?: true
   name?: true
   description?: true
   frequency?: true
-  targetCount?: true
-  isActive?: true
-  createdAt?: true
-  updatedAt?: true
+  target_count?: true
+  is_active?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -205,14 +205,14 @@ export type HabitGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type HabitGroupByOutputType = {
   id: string
-  userId: string
+  user_id: string
   name: string
   description: string | null
   frequency: $Enums.HabitFrequency
-  targetCount: number | null
-  isActive: boolean
-  createdAt: Date
-  updatedAt: Date
+  target_count: number | null
+  is_active: boolean
+  created_at: Date
+  updated_at: Date
   _count: HabitCountAggregateOutputType | null
   _avg: HabitAvgAggregateOutputType | null
   _sum: HabitSumAggregateOutputType | null
@@ -240,14 +240,14 @@ export type HabitWhereInput = {
   OR?: Prisma.HabitWhereInput[]
   NOT?: Prisma.HabitWhereInput | Prisma.HabitWhereInput[]
   id?: Prisma.StringFilter<"Habit"> | string
-  userId?: Prisma.StringFilter<"Habit"> | string
+  user_id?: Prisma.StringFilter<"Habit"> | string
   name?: Prisma.StringFilter<"Habit"> | string
   description?: Prisma.StringNullableFilter<"Habit"> | string | null
   frequency?: Prisma.EnumHabitFrequencyFilter<"Habit"> | $Enums.HabitFrequency
-  targetCount?: Prisma.IntNullableFilter<"Habit"> | number | null
-  isActive?: Prisma.BoolFilter<"Habit"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"Habit"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Habit"> | Date | string
+  target_count?: Prisma.IntNullableFilter<"Habit"> | number | null
+  is_active?: Prisma.BoolFilter<"Habit"> | boolean
+  created_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   entries?: Prisma.EntryListRelationFilter
   tags?: Prisma.HabitTagListRelationFilter
@@ -255,14 +255,14 @@ export type HabitWhereInput = {
 
 export type HabitOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   frequency?: Prisma.SortOrder
-  targetCount?: Prisma.SortOrderInput | Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  target_count?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   entries?: Prisma.EntryOrderByRelationAggregateInput
   tags?: Prisma.HabitTagOrderByRelationAggregateInput
@@ -273,14 +273,14 @@ export type HabitWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.HabitWhereInput | Prisma.HabitWhereInput[]
   OR?: Prisma.HabitWhereInput[]
   NOT?: Prisma.HabitWhereInput | Prisma.HabitWhereInput[]
-  userId?: Prisma.StringFilter<"Habit"> | string
+  user_id?: Prisma.StringFilter<"Habit"> | string
   name?: Prisma.StringFilter<"Habit"> | string
   description?: Prisma.StringNullableFilter<"Habit"> | string | null
   frequency?: Prisma.EnumHabitFrequencyFilter<"Habit"> | $Enums.HabitFrequency
-  targetCount?: Prisma.IntNullableFilter<"Habit"> | number | null
-  isActive?: Prisma.BoolFilter<"Habit"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"Habit"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Habit"> | Date | string
+  target_count?: Prisma.IntNullableFilter<"Habit"> | number | null
+  is_active?: Prisma.BoolFilter<"Habit"> | boolean
+  created_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   entries?: Prisma.EntryListRelationFilter
   tags?: Prisma.HabitTagListRelationFilter
@@ -288,14 +288,14 @@ export type HabitWhereUniqueInput = Prisma.AtLeast<{
 
 export type HabitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   frequency?: Prisma.SortOrder
-  targetCount?: Prisma.SortOrderInput | Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  target_count?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.HabitCountOrderByAggregateInput
   _avg?: Prisma.HabitAvgOrderByAggregateInput
   _max?: Prisma.HabitMaxOrderByAggregateInput
@@ -308,14 +308,14 @@ export type HabitScalarWhereWithAggregatesInput = {
   OR?: Prisma.HabitScalarWhereWithAggregatesInput[]
   NOT?: Prisma.HabitScalarWhereWithAggregatesInput | Prisma.HabitScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Habit"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"Habit"> | string
+  user_id?: Prisma.StringWithAggregatesFilter<"Habit"> | string
   name?: Prisma.StringWithAggregatesFilter<"Habit"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Habit"> | string | null
   frequency?: Prisma.EnumHabitFrequencyWithAggregatesFilter<"Habit"> | $Enums.HabitFrequency
-  targetCount?: Prisma.IntNullableWithAggregatesFilter<"Habit"> | number | null
-  isActive?: Prisma.BoolWithAggregatesFilter<"Habit"> | boolean
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Habit"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Habit"> | Date | string
+  target_count?: Prisma.IntNullableWithAggregatesFilter<"Habit"> | number | null
+  is_active?: Prisma.BoolWithAggregatesFilter<"Habit"> | boolean
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"Habit"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"Habit"> | Date | string
 }
 
 export type HabitCreateInput = {
@@ -323,10 +323,10 @@ export type HabitCreateInput = {
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutHabitsInput
   entries?: Prisma.EntryCreateNestedManyWithoutHabitInput
   tags?: Prisma.HabitTagCreateNestedManyWithoutHabitInput
@@ -334,14 +334,14 @@ export type HabitCreateInput = {
 
 export type HabitUncheckedCreateInput = {
   id?: string
-  userId: string
+  user_id: string
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   entries?: Prisma.EntryUncheckedCreateNestedManyWithoutHabitInput
   tags?: Prisma.HabitTagUncheckedCreateNestedManyWithoutHabitInput
 }
@@ -351,10 +351,10 @@ export type HabitUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutHabitsNestedInput
   entries?: Prisma.EntryUpdateManyWithoutHabitNestedInput
   tags?: Prisma.HabitTagUpdateManyWithoutHabitNestedInput
@@ -362,28 +362,28 @@ export type HabitUpdateInput = {
 
 export type HabitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   entries?: Prisma.EntryUncheckedUpdateManyWithoutHabitNestedInput
   tags?: Prisma.HabitTagUncheckedUpdateManyWithoutHabitNestedInput
 }
 
 export type HabitCreateManyInput = {
   id?: string
-  userId: string
+  user_id: string
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type HabitUpdateManyMutationInput = {
@@ -391,22 +391,22 @@ export type HabitUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabitListRelationFilter = {
@@ -421,46 +421,46 @@ export type HabitOrderByRelationAggregateInput = {
 
 export type HabitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
-  targetCount?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  target_count?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type HabitAvgOrderByAggregateInput = {
-  targetCount?: Prisma.SortOrder
+  target_count?: Prisma.SortOrder
 }
 
 export type HabitMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
-  targetCount?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  target_count?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type HabitMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
-  targetCount?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  target_count?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type HabitSumOrderByAggregateInput = {
-  targetCount?: Prisma.SortOrder
+  target_count?: Prisma.SortOrder
 }
 
 export type HabitScalarRelationFilter = {
@@ -559,10 +559,10 @@ export type HabitCreateWithoutUserInput = {
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   entries?: Prisma.EntryCreateNestedManyWithoutHabitInput
   tags?: Prisma.HabitTagCreateNestedManyWithoutHabitInput
 }
@@ -572,10 +572,10 @@ export type HabitUncheckedCreateWithoutUserInput = {
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   entries?: Prisma.EntryUncheckedCreateNestedManyWithoutHabitInput
   tags?: Prisma.HabitTagUncheckedCreateNestedManyWithoutHabitInput
 }
@@ -611,14 +611,14 @@ export type HabitScalarWhereInput = {
   OR?: Prisma.HabitScalarWhereInput[]
   NOT?: Prisma.HabitScalarWhereInput | Prisma.HabitScalarWhereInput[]
   id?: Prisma.StringFilter<"Habit"> | string
-  userId?: Prisma.StringFilter<"Habit"> | string
+  user_id?: Prisma.StringFilter<"Habit"> | string
   name?: Prisma.StringFilter<"Habit"> | string
   description?: Prisma.StringNullableFilter<"Habit"> | string | null
   frequency?: Prisma.EnumHabitFrequencyFilter<"Habit"> | $Enums.HabitFrequency
-  targetCount?: Prisma.IntNullableFilter<"Habit"> | number | null
-  isActive?: Prisma.BoolFilter<"Habit"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"Habit"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Habit"> | Date | string
+  target_count?: Prisma.IntNullableFilter<"Habit"> | number | null
+  is_active?: Prisma.BoolFilter<"Habit"> | boolean
+  created_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
 }
 
 export type HabitCreateWithoutEntriesInput = {
@@ -626,24 +626,24 @@ export type HabitCreateWithoutEntriesInput = {
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutHabitsInput
   tags?: Prisma.HabitTagCreateNestedManyWithoutHabitInput
 }
 
 export type HabitUncheckedCreateWithoutEntriesInput = {
   id?: string
-  userId: string
+  user_id: string
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   tags?: Prisma.HabitTagUncheckedCreateNestedManyWithoutHabitInput
 }
 
@@ -668,24 +668,24 @@ export type HabitUpdateWithoutEntriesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutHabitsNestedInput
   tags?: Prisma.HabitTagUpdateManyWithoutHabitNestedInput
 }
 
 export type HabitUncheckedUpdateWithoutEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tags?: Prisma.HabitTagUncheckedUpdateManyWithoutHabitNestedInput
 }
 
@@ -694,24 +694,24 @@ export type HabitCreateWithoutTagsInput = {
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutHabitsInput
   entries?: Prisma.EntryCreateNestedManyWithoutHabitInput
 }
 
 export type HabitUncheckedCreateWithoutTagsInput = {
   id?: string
-  userId: string
+  user_id: string
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   entries?: Prisma.EntryUncheckedCreateNestedManyWithoutHabitInput
 }
 
@@ -736,24 +736,24 @@ export type HabitUpdateWithoutTagsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutHabitsNestedInput
   entries?: Prisma.EntryUpdateManyWithoutHabitNestedInput
 }
 
 export type HabitUncheckedUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   entries?: Prisma.EntryUncheckedUpdateManyWithoutHabitNestedInput
 }
 
@@ -762,10 +762,10 @@ export type HabitCreateManyUserInput = {
   name: string
   description?: string | null
   frequency: $Enums.HabitFrequency
-  targetCount?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  target_count?: number | null
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type HabitUpdateWithoutUserInput = {
@@ -773,10 +773,10 @@ export type HabitUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   entries?: Prisma.EntryUpdateManyWithoutHabitNestedInput
   tags?: Prisma.HabitTagUpdateManyWithoutHabitNestedInput
 }
@@ -786,10 +786,10 @@ export type HabitUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   entries?: Prisma.EntryUncheckedUpdateManyWithoutHabitNestedInput
   tags?: Prisma.HabitTagUncheckedUpdateManyWithoutHabitNestedInput
 }
@@ -799,10 +799,10 @@ export type HabitUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumHabitFrequencyFieldUpdateOperationsInput | $Enums.HabitFrequency
-  targetCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  target_count?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -847,14 +847,14 @@ export type HabitCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Exte
 
 export type HabitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  user_id?: boolean
   name?: boolean
   description?: boolean
   frequency?: boolean
-  targetCount?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  target_count?: boolean
+  is_active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   entries?: boolean | Prisma.Habit$entriesArgs<ExtArgs>
   tags?: boolean | Prisma.Habit$tagsArgs<ExtArgs>
@@ -863,43 +863,43 @@ export type HabitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type HabitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  user_id?: boolean
   name?: boolean
   description?: boolean
   frequency?: boolean
-  targetCount?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  target_count?: boolean
+  is_active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["habit"]>
 
 export type HabitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  user_id?: boolean
   name?: boolean
   description?: boolean
   frequency?: boolean
-  targetCount?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  target_count?: boolean
+  is_active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["habit"]>
 
 export type HabitSelectScalar = {
   id?: boolean
-  userId?: boolean
+  user_id?: boolean
   name?: boolean
   description?: boolean
   frequency?: boolean
-  targetCount?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  target_count?: boolean
+  is_active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type HabitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "description" | "frequency" | "targetCount" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["habit"]>
+export type HabitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "name" | "description" | "frequency" | "target_count" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["habit"]>
 export type HabitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   entries?: boolean | Prisma.Habit$entriesArgs<ExtArgs>
@@ -922,14 +922,14 @@ export type $HabitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    userId: string
+    user_id: string
     name: string
     description: string | null
     frequency: $Enums.HabitFrequency
-    targetCount: number | null
-    isActive: boolean
-    createdAt: Date
-    updatedAt: Date
+    target_count: number | null
+    is_active: boolean
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["habit"]>
   composites: {}
 }
@@ -1357,14 +1357,14 @@ export interface Prisma__HabitClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface HabitFieldRefs {
   readonly id: Prisma.FieldRef<"Habit", 'String'>
-  readonly userId: Prisma.FieldRef<"Habit", 'String'>
+  readonly user_id: Prisma.FieldRef<"Habit", 'String'>
   readonly name: Prisma.FieldRef<"Habit", 'String'>
   readonly description: Prisma.FieldRef<"Habit", 'String'>
   readonly frequency: Prisma.FieldRef<"Habit", 'HabitFrequency'>
-  readonly targetCount: Prisma.FieldRef<"Habit", 'Int'>
-  readonly isActive: Prisma.FieldRef<"Habit", 'Boolean'>
-  readonly createdAt: Prisma.FieldRef<"Habit", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"Habit", 'DateTime'>
+  readonly target_count: Prisma.FieldRef<"Habit", 'Int'>
+  readonly is_active: Prisma.FieldRef<"Habit", 'Boolean'>
+  readonly created_at: Prisma.FieldRef<"Habit", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"Habit", 'DateTime'>
 }
     
 

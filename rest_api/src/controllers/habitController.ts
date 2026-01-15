@@ -1,23 +1,23 @@
 import { prisma } from "./../config/prisma.ts";
 import type { Response } from "express";
 import { type AuthRequest } from "./../middlewares/authenticate.ts";
-import { truncate } from "node:fs";
-import { tuple } from "zod";
+
 
 // Create Habbit
 export async function createHabit(req: AuthRequest, res: Response) {
+  console.log("::::::::::::::::: createHabit controller hit:::::::::::::::");
   try {
-    const {id, username, email} = req.user;
+    const {id} = req.user;
     const { name, description, frequency, targetCount, tagName, color } = await req.body;
     // create habbit and if there's tag some tags
     const newTrx = await prisma.$transaction(async (trx) => {
       const newHabit = await trx.habit.create({
         data: {
-          userId: id,
+          user_id: id,
           name: name,
           description: description,
           frequency: frequency,
-          targetCount: targetCount,
+          target_count: targetCount,
         },
       });
       // create also entries
@@ -31,8 +31,8 @@ export async function createHabit(req: AuthRequest, res: Response) {
       //create habbit tag
       const newHabitTag = await trx.habitTag.create({
         data: {
-          habitId: newHabit.id,
-          tagId: newTag?.id,
+          habit_id: newHabit.id,
+          tag_id: newTag?.id,
         },
       });
       // return
@@ -54,21 +54,21 @@ export async function createHabit(req: AuthRequest, res: Response) {
 
 // update habit
 export async function updateHabit(req: AuthRequest, res: Response) {
-    const userId = req.user!.id;
-    const habitId = req.params.id;
+    const userId = req.user!.id as string;
+    const habitId = req.params.id as string;
     const { name, description, frequency, targetCount , isActive} = req.body;
     try {
         const result = await prisma.$transaction(async (trx) => {
             // update user's habit
             const updatedHabit = await trx.habit.update({
-                where: { id: habitId, userId: userId },
+                where: { id: habitId, user_id: userId },
                 data: {
                     name: name,
                     description: description,
                     frequency: frequency,
-                    targetCount: targetCount,
-                    isActive: isActive,
-                    updatedAt: new Date()
+                    target_count: targetCount,
+                    is_active: isActive,
+                    updated_at: new Date()
                 }
             });
             // update entry if possible
@@ -82,10 +82,10 @@ export async function updateHabit(req: AuthRequest, res: Response) {
     }
 }
 
-
 export async function deleteHabit(req: AuthRequest, res: Response) {
     try {
-        const habitId = req.params.id;
+      const habitId = req.params.id as string;
+      // delete 
         const result = await prisma.habit.delete({
             where: { id: habitId }
         })
@@ -98,24 +98,25 @@ export async function deleteHabit(req: AuthRequest, res: Response) {
 
 // get all user habits habits
 export async function getHabits(req: AuthRequest, res: Response) {
+    console.log("::::::::::::::::: getHabit controller hit:::::::::::::::");
   const { id, ...rest } = req.user;
   try {
     const habits = await prisma.habit.findMany({
-      where: { userId: id },
+      where: { user_id: id },
       select: {
         id: true,
-        userId: true,
+        user_id: true,
         name: true,
         description: true,
         frequency: true,
-        targetCount: true,
-        isActive: true,
-        createdAt: true,
-        updatedAt: true,
+        target_count: true,
+        is_active: true,
+        created_at: true,
+        updated_at: true,
         user: {
           select: {
             email: true,
-            username: true,
+            user_name: true,
           }
         },
         entries: {

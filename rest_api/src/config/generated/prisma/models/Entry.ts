@@ -36,26 +36,26 @@ export type EntrySumAggregateOutputType = {
 
 export type EntryMinAggregateOutputType = {
   id: string | null
-  habitId: string | null
+  habit_id: string | null
   completion: number | null
   note: string | null
-  createdAt: Date | null
+  created_at: Date | null
 }
 
 export type EntryMaxAggregateOutputType = {
   id: string | null
-  habitId: string | null
+  habit_id: string | null
   completion: number | null
   note: string | null
-  createdAt: Date | null
+  created_at: Date | null
 }
 
 export type EntryCountAggregateOutputType = {
   id: number
-  habitId: number
+  habit_id: number
   completion: number
   note: number
-  createdAt: number
+  created_at: number
   _all: number
 }
 
@@ -70,26 +70,26 @@ export type EntrySumAggregateInputType = {
 
 export type EntryMinAggregateInputType = {
   id?: true
-  habitId?: true
+  habit_id?: true
   completion?: true
   note?: true
-  createdAt?: true
+  created_at?: true
 }
 
 export type EntryMaxAggregateInputType = {
   id?: true
-  habitId?: true
+  habit_id?: true
   completion?: true
   note?: true
-  createdAt?: true
+  created_at?: true
 }
 
 export type EntryCountAggregateInputType = {
   id?: true
-  habitId?: true
+  habit_id?: true
   completion?: true
   note?: true
-  createdAt?: true
+  created_at?: true
   _all?: true
 }
 
@@ -181,10 +181,10 @@ export type EntryGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type EntryGroupByOutputType = {
   id: string
-  habitId: string
+  habit_id: string
   completion: number
   note: string | null
-  createdAt: Date
+  created_at: Date
   _count: EntryCountAggregateOutputType | null
   _avg: EntryAvgAggregateOutputType | null
   _sum: EntrySumAggregateOutputType | null
@@ -212,19 +212,19 @@ export type EntryWhereInput = {
   OR?: Prisma.EntryWhereInput[]
   NOT?: Prisma.EntryWhereInput | Prisma.EntryWhereInput[]
   id?: Prisma.StringFilter<"Entry"> | string
-  habitId?: Prisma.StringFilter<"Entry"> | string
+  habit_id?: Prisma.StringFilter<"Entry"> | string
   completion?: Prisma.IntFilter<"Entry"> | number
   note?: Prisma.StringNullableFilter<"Entry"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Entry"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"Entry"> | Date | string
   habit?: Prisma.XOR<Prisma.HabitScalarRelationFilter, Prisma.HabitWhereInput>
 }
 
 export type EntryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
   completion?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   habit?: Prisma.HabitOrderByWithRelationInput
 }
 
@@ -233,19 +233,19 @@ export type EntryWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.EntryWhereInput | Prisma.EntryWhereInput[]
   OR?: Prisma.EntryWhereInput[]
   NOT?: Prisma.EntryWhereInput | Prisma.EntryWhereInput[]
-  habitId?: Prisma.StringFilter<"Entry"> | string
+  habit_id?: Prisma.StringFilter<"Entry"> | string
   completion?: Prisma.IntFilter<"Entry"> | number
   note?: Prisma.StringNullableFilter<"Entry"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Entry"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"Entry"> | Date | string
   habit?: Prisma.XOR<Prisma.HabitScalarRelationFilter, Prisma.HabitWhereInput>
 }, "id">
 
 export type EntryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
   completion?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   _count?: Prisma.EntryCountOrderByAggregateInput
   _avg?: Prisma.EntryAvgOrderByAggregateInput
   _max?: Prisma.EntryMaxOrderByAggregateInput
@@ -258,65 +258,65 @@ export type EntryScalarWhereWithAggregatesInput = {
   OR?: Prisma.EntryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.EntryScalarWhereWithAggregatesInput | Prisma.EntryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Entry"> | string
-  habitId?: Prisma.StringWithAggregatesFilter<"Entry"> | string
+  habit_id?: Prisma.StringWithAggregatesFilter<"Entry"> | string
   completion?: Prisma.IntWithAggregatesFilter<"Entry"> | number
   note?: Prisma.StringNullableWithAggregatesFilter<"Entry"> | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Entry"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"Entry"> | Date | string
 }
 
 export type EntryCreateInput = {
   id?: string
   completion: number
   note?: string | null
-  createdAt?: Date | string
+  created_at?: Date | string
   habit: Prisma.HabitCreateNestedOneWithoutEntriesInput
 }
 
 export type EntryUncheckedCreateInput = {
   id?: string
-  habitId: string
+  habit_id: string
   completion: number
   note?: string | null
-  createdAt?: Date | string
+  created_at?: Date | string
 }
 
 export type EntryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   completion?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   habit?: Prisma.HabitUpdateOneRequiredWithoutEntriesNestedInput
 }
 
 export type EntryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  habitId?: Prisma.StringFieldUpdateOperationsInput | string
+  habit_id?: Prisma.StringFieldUpdateOperationsInput | string
   completion?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EntryCreateManyInput = {
   id?: string
-  habitId: string
+  habit_id: string
   completion: number
   note?: string | null
-  createdAt?: Date | string
+  created_at?: Date | string
 }
 
 export type EntryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   completion?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EntryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  habitId?: Prisma.StringFieldUpdateOperationsInput | string
+  habit_id?: Prisma.StringFieldUpdateOperationsInput | string
   completion?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EntryListRelationFilter = {
@@ -331,10 +331,10 @@ export type EntryOrderByRelationAggregateInput = {
 
 export type EntryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
   completion?: Prisma.SortOrder
   note?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type EntryAvgOrderByAggregateInput = {
@@ -343,18 +343,18 @@ export type EntryAvgOrderByAggregateInput = {
 
 export type EntryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
   completion?: Prisma.SortOrder
   note?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type EntryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  habitId?: Prisma.SortOrder
+  habit_id?: Prisma.SortOrder
   completion?: Prisma.SortOrder
   note?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type EntrySumOrderByAggregateInput = {
@@ -415,14 +415,14 @@ export type EntryCreateWithoutHabitInput = {
   id?: string
   completion: number
   note?: string | null
-  createdAt?: Date | string
+  created_at?: Date | string
 }
 
 export type EntryUncheckedCreateWithoutHabitInput = {
   id?: string
   completion: number
   note?: string | null
-  createdAt?: Date | string
+  created_at?: Date | string
 }
 
 export type EntryCreateOrConnectWithoutHabitInput = {
@@ -456,78 +456,78 @@ export type EntryScalarWhereInput = {
   OR?: Prisma.EntryScalarWhereInput[]
   NOT?: Prisma.EntryScalarWhereInput | Prisma.EntryScalarWhereInput[]
   id?: Prisma.StringFilter<"Entry"> | string
-  habitId?: Prisma.StringFilter<"Entry"> | string
+  habit_id?: Prisma.StringFilter<"Entry"> | string
   completion?: Prisma.IntFilter<"Entry"> | number
   note?: Prisma.StringNullableFilter<"Entry"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Entry"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"Entry"> | Date | string
 }
 
 export type EntryCreateManyHabitInput = {
   id?: string
   completion: number
   note?: string | null
-  createdAt?: Date | string
+  created_at?: Date | string
 }
 
 export type EntryUpdateWithoutHabitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   completion?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EntryUncheckedUpdateWithoutHabitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   completion?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EntryUncheckedUpdateManyWithoutHabitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   completion?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type EntrySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  habitId?: boolean
+  habit_id?: boolean
   completion?: boolean
   note?: boolean
-  createdAt?: boolean
+  created_at?: boolean
   habit?: boolean | Prisma.HabitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["entry"]>
 
 export type EntrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  habitId?: boolean
+  habit_id?: boolean
   completion?: boolean
   note?: boolean
-  createdAt?: boolean
+  created_at?: boolean
   habit?: boolean | Prisma.HabitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["entry"]>
 
 export type EntrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  habitId?: boolean
+  habit_id?: boolean
   completion?: boolean
   note?: boolean
-  createdAt?: boolean
+  created_at?: boolean
   habit?: boolean | Prisma.HabitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["entry"]>
 
 export type EntrySelectScalar = {
   id?: boolean
-  habitId?: boolean
+  habit_id?: boolean
   completion?: boolean
   note?: boolean
-  createdAt?: boolean
+  created_at?: boolean
 }
 
-export type EntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "habitId" | "completion" | "note" | "createdAt", ExtArgs["result"]["entry"]>
+export type EntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "habit_id" | "completion" | "note" | "created_at", ExtArgs["result"]["entry"]>
 export type EntryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   habit?: boolean | Prisma.HabitDefaultArgs<ExtArgs>
 }
@@ -545,10 +545,10 @@ export type $EntryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    habitId: string
+    habit_id: string
     completion: number
     note: string | null
-    createdAt: Date
+    created_at: Date
   }, ExtArgs["result"]["entry"]>
   composites: {}
 }
@@ -974,10 +974,10 @@ export interface Prisma__EntryClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface EntryFieldRefs {
   readonly id: Prisma.FieldRef<"Entry", 'String'>
-  readonly habitId: Prisma.FieldRef<"Entry", 'String'>
+  readonly habit_id: Prisma.FieldRef<"Entry", 'String'>
   readonly completion: Prisma.FieldRef<"Entry", 'Int'>
   readonly note: Prisma.FieldRef<"Entry", 'String'>
-  readonly createdAt: Prisma.FieldRef<"Entry", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"Entry", 'DateTime'>
 }
     
 
