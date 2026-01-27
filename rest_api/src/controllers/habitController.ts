@@ -56,19 +56,14 @@ export async function createHabit(req: AuthRequest, res: Response) {
 export async function updateHabit(req: AuthRequest, res: Response) {
     const userId = req.user!.id as string;
     const habitId = req.params.id as string;
-    const { name, description, frequency, targetCount , isActive} = req.body;
+    const updateData = req.body;
     try {
         const result = await prisma.$transaction(async (trx) => {
             // update user's habit
             const updatedHabit = await trx.habit.update({
                 where: { id: habitId, user_id: userId },
                 data: {
-                    name: name,
-                    description: description,
-                    frequency: frequency,
-                    target_count: targetCount,
-                    is_active: isActive,
-                    updated_at: new Date()
+                    ...updateData
                 }
             });
             // update entry if possible
@@ -76,6 +71,7 @@ export async function updateHabit(req: AuthRequest, res: Response) {
                 return res.status(400).end();
             }
         });
+      return res.status(200).json({message:"habit updated successfully"})
     } catch (err) {
         console.error("Failed to update habit", err);
         res.status(500).json({ message: " Faild to update habit" });

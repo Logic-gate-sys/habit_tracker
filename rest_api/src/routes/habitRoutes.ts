@@ -11,7 +11,7 @@ habitRouter.use(authenticateToken);
 
 
 // create routes 
-habitRouter.post('/new', validateBody(createHabbitSchema), createHabit);
+habitRouter.post('/', validateBody(createHabbitSchema), createHabit);
 // fetch all user habbits
 habitRouter.get('/', getHabits);
 //update

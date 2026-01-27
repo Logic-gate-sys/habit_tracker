@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node  --trace-warnings  --watch  src/index.ts",
     "test": "vitest run",
+    "test:watch": "vitest",
     "coverage": "vitest run --coverage"
   },
   "keywords": [],
@@ -36,6 +37,7 @@
     "@types/morgan": "^1.9.10",
     "@types/node": "^25.0.5",
     "@types/pg": "^8.16.0",
+    "@types/supertest": "^6.0.3",
     "@vitest/coverage-v8": "^4.0.17",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
