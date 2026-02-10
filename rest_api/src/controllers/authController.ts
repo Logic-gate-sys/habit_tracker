@@ -6,27 +6,29 @@ import { prisma } from "../config/prisma.ts";
 
 export async function signup(req: Request, res: Response) {
     try {
-        const { username, email, password, firstname, lastname } = await req.body;
+        const { userName, email, password, firstName,middleName, lastName } =  req.body;
         // deos any user exits with these details
         const existingUser = await prisma.user.findFirst({
             where: { email: email }
         })
         if (existingUser) {
-           return  res.status(404).json({ message: 'Invalid credentials'})
+           return  res.status(409).json({ message: 'User already exists, login !'})
         }
         // hash password
         const hashedPassword = await hashPassword(password);
         // insert into db 
         const newUser = await prisma.user.create({
             data: {
-                user_name: username,
+                user_name: userName,
                 email: email,
                 password: hashedPassword,
-                first_name: firstname ?? '',
-                last_name: lastname??''
+                f_name: firstName,
+                m_name: middleName,
+                l_name:lastName
             }
         });
-       const token = await generateToken({ id: newUser?.id, username: newUser?.user_name, email: newUser?.email });
+        const payload = { id: newUser?.id, username: newUser?.user_name, email: newUser?.email };
+       const token = await generateToken(payload);
 
         return res.status(201).json({
             success: true,
@@ -48,13 +50,13 @@ export async function signup(req: Request, res: Response) {
 
 export async function login(req: Request, res: Response) {
     try {
-        const { email, password } = await req.body;
+        const { email, password } =  req.body;
         // verify user
         const user = await prisma.user.findFirst({
             where: { email: email }
         });
         if (!user) {
-            return res.status(400).json({error:'Invalid credentials', message: 'Failed to login'})
+            return res.status(400).json({error:'Invalid User', message: 'Please consider signing up'})
         }
         // verify password 
         const isValidUser = await verifyPassword(password, user?.password);

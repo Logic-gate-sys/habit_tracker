@@ -9,10 +9,22 @@
 * 🟢 You can import this file directly.
 */
 
-export const HabitFrequency = {
-  DAILY: 'DAILY',
-  WEEKLY: 'WEEKLY',
-  MONTHLY: 'MONTHLY'
+export const BADGE = {
+  JEDI: 'JEDI',
+  MASTERY: 'MASTERY',
+  COLONEL: 'COLONEL',
+  JUNIOR: 'JUNIOR',
+  AMATEUR: 'AMATEUR'
 } as const
 
-export type HabitFrequency = (typeof HabitFrequency)[keyof typeof HabitFrequency]
+export type BADGE = (typeof BADGE)[keyof typeof BADGE]
+
+
+export const FREQUENCY = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  OTHER: 'OTHER'
+} as const
+
+export type FREQUENCY = (typeof FREQUENCY)[keyof typeof FREQUENCY]

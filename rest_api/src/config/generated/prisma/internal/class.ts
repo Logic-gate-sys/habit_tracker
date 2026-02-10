@@ -17,10 +17,10 @@ import type * as Prisma from "./prismaNamespace.ts"
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.2.0",
-  "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
+  "clientVersion": "7.3.0",
+  "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../src/config/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// ------------- HABBIT TRACKER SCHEMA ----------------------\nenum HabitFrequency {\n  DAILY\n  WEEKLY\n  MONTHLY\n}\n\nmodel User {\n  id         String   @id @default(cuid())\n  email      String   @unique\n  user_name  String   @unique\n  password   String\n  first_name String?\n  last_name  String?\n  created_at DateTime @default(now())\n  updated_at DateTime @updatedAt\n\n  habits Habit[]\n}\n\nmodel Habit {\n  id           String         @id @default(cuid())\n  user_id      String\n  name         String\n  description  String?\n  frequency    HabitFrequency\n  target_count Int?\n  is_active    Boolean        @default(true)\n  created_at   DateTime       @default(now())\n  updated_at   DateTime       @updatedAt\n\n  user    User       @relation(fields: [user_id], references: [id], onDelete: Cascade)\n  entries Entry[]\n  tags    HabitTag[]\n}\n\nmodel Entry {\n  id         String   @id @default(cuid())\n  habit_id   String\n  completion Int\n  note       String?\n  created_at DateTime @default(now())\n\n  habit Habit @relation(fields: [habit_id], references: [id], onDelete: Cascade)\n\n  @@index([habit_id])\n}\n\nmodel Tag {\n  id         String   @id @default(cuid())\n  name       String   @unique\n  color      String?\n  created_at DateTime @default(now())\n  updated_at DateTime @updatedAt\n\n  habits HabitTag[]\n}\n\nmodel HabitTag {\n  id         String   @id @default(cuid())\n  habit_id   String\n  tag_id     String\n  created_id DateTime @default(now())\n\n  habit Habit @relation(fields: [habit_id], references: [id], onDelete: Cascade)\n  tag   Tag   @relation(fields: [tag_id], references: [id], onDelete: Cascade)\n\n  @@unique([habit_id, tag_id])\n  @@index([habit_id])\n  @@index([tag_id])\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/config/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// ------------- HABBIT TRACKER SCHEMA ----------------------\nmodel User {\n  id         String   @unique @default(uuid())\n  email      String   @unique\n  password   String\n  user_name  String\n  f_name     String?\n  m_name     String?\n  l_name     String?\n  time_zone  String?\n  created_at DateTime @default(now())\n\n  habits Habit[] // one user could have 0 or more habits\n  tags   Tag[] // user could have 0 or 1 tags \n}\n\nmodel Tag {\n  id         String   @unique @default(uuid())\n  user_id    String\n  name       String // e.g sports, literature, boxing , beauty, etc\n  color      String // hex representation of tag color code \n  created_at DateTime @default(now())\n\n  //relationships \n  habit Habit[]\n  user  User    @relation(fields: [user_id], references: [id], onDelete: Cascade)\n}\n\nmodel Habit {\n  id           String    @unique @default(uuid())\n  user_id      String\n  tag_id       String // this specifies which tag a habit sits under \n  title        String\n  description  String? // optional description\n  frequency    FREQUENCY\n  target_value Float\n  unit         String // e.g., \"minutes\", \"pages\": will be validate by middleware\n  sleep        Boolean   @default(false) // an attribute to track habits with consecutive inactivity \n  res_counter  Int       @default(0) // set when habit sleeps due to inactivity\n  goal_reached Boolean   @default(false) // is the habits goal reached s\n  archived     Boolean   @default(false) // is habit currently archieved : archieve is same as sun-set \n  badge        BADGE? // completion badge \n  created_at   DateTime  @default(now())\n\n  //relationship\n  tag  Tag    @relation(fields: [tag_id], references: [id], onDelete: Cascade)\n  user User   @relation(fields: [user_id], references: [id], onDelete: Cascade)\n  logs Logs[] // one 0:m  habit->logs\n}\n\nmodel Logs {\n  id         String    @unique @default(uuid())\n  habit_id   String\n  value      String // value of the goal achieved \n  note       String? // note of completion\n  created_at DateTime  @default(now())\n  updated_at DateTime? // when an entry is updated: UTC time only\n\n  habit Habit @relation(fields: [habit_id], references: [id], onDelete: Cascade)\n}\n\n//::::::::::::::::: enums ::::::::::::::::::::::::::::::::::\nenum BADGE {\n  JEDI\n  MASTERY\n  COLONEL\n  JUNIOR // with 4 streak loses\n  AMATEUR // with 5 + streak loses\n}\n\nenum FREQUENCY {\n  DAILY\n  WEEKLY\n  MONTHLY\n  OTHER // other includes custom frequencies , like 2 times a week etc, MON,TUE,WEN etc\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"habits\",\"kind\":\"object\",\"type\":\"Habit\",\"relationName\":\"HabitToUser\"}],\"dbName\":null},\"Habit\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"frequency\",\"kind\":\"enum\",\"type\":\"HabitFrequency\"},{\"name\":\"target_count\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"is_active\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"HabitToUser\"},{\"name\":\"entries\",\"kind\":\"object\",\"type\":\"Entry\",\"relationName\":\"EntryToHabit\"},{\"name\":\"tags\",\"kind\":\"object\",\"type\":\"HabitTag\",\"relationName\":\"HabitToHabitTag\"}],\"dbName\":null},\"Entry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"habit_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"completion\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"note\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"habit\",\"kind\":\"object\",\"type\":\"Habit\",\"relationName\":\"EntryToHabit\"}],\"dbName\":null},\"Tag\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"color\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"habits\",\"kind\":\"object\",\"type\":\"HabitTag\",\"relationName\":\"HabitTagToTag\"}],\"dbName\":null},\"HabitTag\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"habit_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tag_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_id\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"habit\",\"kind\":\"object\",\"type\":\"Habit\",\"relationName\":\"HabitToHabitTag\"},{\"name\":\"tag\",\"kind\":\"object\",\"type\":\"Tag\",\"relationName\":\"HabitTagToTag\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"f_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"m_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"l_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"time_zone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"habits\",\"kind\":\"object\",\"type\":\"Habit\",\"relationName\":\"HabitToUser\"},{\"name\":\"tags\",\"kind\":\"object\",\"type\":\"Tag\",\"relationName\":\"TagToUser\"}],\"dbName\":null},\"Tag\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"color\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"habit\",\"kind\":\"object\",\"type\":\"Habit\",\"relationName\":\"HabitToTag\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TagToUser\"}],\"dbName\":null},\"Habit\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tag_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"frequency\",\"kind\":\"enum\",\"type\":\"FREQUENCY\"},{\"name\":\"target_value\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"unit\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sleep\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"res_counter\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"goal_reached\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"archived\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"badge\",\"kind\":\"enum\",\"type\":\"BADGE\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"tag\",\"kind\":\"object\",\"type\":\"Tag\",\"relationName\":\"HabitToTag\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"HabitToUser\"},{\"name\":\"logs\",\"kind\":\"object\",\"type\":\"Logs\",\"relationName\":\"HabitToLogs\"}],\"dbName\":null},\"Logs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"habit_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"note\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"habit\",\"kind\":\"object\",\"type\":\"Habit\",\"relationName\":\"HabitToLogs\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -37,12 +37,14 @@ async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Modul
 }
 
 config.compilerWasm = {
-  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_bg.postgresql.mjs"),
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.mjs"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import("@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.mjs")
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.mjs")
     return await decodeBase64AsWasm(wasm)
-  }
+  },
+
+  importName: "./query_compiler_fast_bg.js"
 }
 
 
@@ -185,26 +187,6 @@ export interface PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.habit`: Exposes CRUD operations for the **Habit** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Habits
-    * const habits = await prisma.habit.findMany()
-    * ```
-    */
-  get habit(): Prisma.HabitDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.entry`: Exposes CRUD operations for the **Entry** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Entries
-    * const entries = await prisma.entry.findMany()
-    * ```
-    */
-  get entry(): Prisma.EntryDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
    * `prisma.tag`: Exposes CRUD operations for the **Tag** model.
     * Example usage:
     * ```ts
@@ -215,14 +197,24 @@ export interface PrismaClient<
   get tag(): Prisma.TagDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.habitTag`: Exposes CRUD operations for the **HabitTag** model.
+   * `prisma.habit`: Exposes CRUD operations for the **Habit** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more HabitTags
-    * const habitTags = await prisma.habitTag.findMany()
+    * // Fetch zero or more Habits
+    * const habits = await prisma.habit.findMany()
     * ```
     */
-  get habitTag(): Prisma.HabitTagDelegate<ExtArgs, { omit: OmitOpts }>;
+  get habit(): Prisma.HabitDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.logs`: Exposes CRUD operations for the **Logs** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Logs
+    * const logs = await prisma.logs.findMany()
+    * ```
+    */
+  get logs(): Prisma.LogsDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

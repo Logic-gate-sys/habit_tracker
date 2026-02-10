@@ -19,9 +19,13 @@ export function generateToken(payload: JWT_Payload) {
 }
 
 
-export async function verifyToken(token: string): Promise<JWTPayload>{
+export async function verifyToken(token: string): Promise<JWT_Payload>{
+  try {
     const secretKey = createSecretKey(env.JWT_SECRET, 'utf-8');
-    const payload = await jwtVerify(token, secretKey);
+    const payload = await jwtVerify(token, secretKey) as unknown as JWT_Payload;
     // return
-    return payload as unknown as JWTPayload;
+    return payload;
+  } catch (err) {
+    throw err; 
+  }
 }

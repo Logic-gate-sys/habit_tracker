@@ -52,10 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Habit: 'Habit',
-  Entry: 'Entry',
   Tag: 'Tag',
-  HabitTag: 'HabitTag'
+  Habit: 'Habit',
+  Logs: 'Logs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -64,12 +63,12 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = {
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
-} as const
+} as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -77,62 +76,59 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  user_name: 'user_name',
   password: 'password',
-  first_name: 'first_name',
-  last_name: 'last_name',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  user_name: 'user_name',
+  f_name: 'f_name',
+  m_name: 'm_name',
+  l_name: 'l_name',
+  time_zone: 'time_zone',
+  created_at: 'created_at'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const HabitScalarFieldEnum = {
+export const TagScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   name: 'name',
-  description: 'description',
-  frequency: 'frequency',
-  target_count: 'target_count',
-  is_active: 'is_active',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type HabitScalarFieldEnum = (typeof HabitScalarFieldEnum)[keyof typeof HabitScalarFieldEnum]
-
-
-export const EntryScalarFieldEnum = {
-  id: 'id',
-  habit_id: 'habit_id',
-  completion: 'completion',
-  note: 'note',
-  created_at: 'created_at'
-} as const
-
-export type EntryScalarFieldEnum = (typeof EntryScalarFieldEnum)[keyof typeof EntryScalarFieldEnum]
-
-
-export const TagScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
   color: 'color',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  created_at: 'created_at'
 } as const
 
 export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
 
 
-export const HabitTagScalarFieldEnum = {
+export const HabitScalarFieldEnum = {
   id: 'id',
-  habit_id: 'habit_id',
+  user_id: 'user_id',
   tag_id: 'tag_id',
-  created_id: 'created_id'
+  title: 'title',
+  description: 'description',
+  frequency: 'frequency',
+  target_value: 'target_value',
+  unit: 'unit',
+  sleep: 'sleep',
+  res_counter: 'res_counter',
+  goal_reached: 'goal_reached',
+  archived: 'archived',
+  badge: 'badge',
+  created_at: 'created_at'
 } as const
 
-export type HabitTagScalarFieldEnum = (typeof HabitTagScalarFieldEnum)[keyof typeof HabitTagScalarFieldEnum]
+export type HabitScalarFieldEnum = (typeof HabitScalarFieldEnum)[keyof typeof HabitScalarFieldEnum]
+
+
+export const LogsScalarFieldEnum = {
+  id: 'id',
+  habit_id: 'habit_id',
+  value: 'value',
+  note: 'note',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LogsScalarFieldEnum = (typeof LogsScalarFieldEnum)[keyof typeof LogsScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -27,10 +27,10 @@ const envSchema = z.object({
 })
 
 // export envschema type
-export type Env= z.infer<typeof envSchema>;
+export type Env = z.infer<typeof envSchema>;
 let env: Env;
 
-// validate env file
+// validate env file 
 try {
     // pass the entire .env file for schema validation
     env = envSchema.parse(process.env); // inspecting the entire env file

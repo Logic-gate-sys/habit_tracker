@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import z, { ZodError, ZodType } from "zod";
+import { ZodError, ZodType } from "zod";
 
 // data validation middleware
 export const validateBody = (schema: ZodType) => {
@@ -9,7 +9,7 @@ export const validateBody = (schema: ZodType) => {
       req.body = validatedData;
       // next function
       next();
-    } catch (error) {
+    } catch (error:unknown) {
       if (error instanceof ZodError) {
         return res.status(400).json({
           error: "Invalid Data schema provided",
@@ -19,7 +19,7 @@ export const validateBody = (schema: ZodType) => {
           })),
         });
       }
-      // if it's not zod error , bass error to next function
+      // if it's not zod error , pass error to next function
       next("error");
     }
   };
@@ -33,7 +33,7 @@ export const validateParams = (schema: ZodType) => {
       schema.parse(req.params); 
       // move on to next middleware or function 
       next(); 
-    } catch (err) {
+    } catch (err:unknown) {
       if (err instanceof ZodError) {
         return res.status(400).json({
           error: 'Invalid Params',

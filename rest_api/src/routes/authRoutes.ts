@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { validateBody } from "../middlewares/validateData.ts";
 import { signup , login} from "../controllers/authController.ts";
-import { createUserSchema, loginSchema } from "../types/zodSchemas.ts";
+import { createUserSchema, loginSchema } from "../schemas/zodSchemas.ts";
 
 const authRouter = Router();
 

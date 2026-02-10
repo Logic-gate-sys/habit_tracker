@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "node  --trace-warnings  --watch  src/index.ts",
+    "prod": "node src/index.ts",
+    "db:push":"npx prisma db push --force-reset",
+    "db:generate":"npx prisma generate",
     "test": "vitest run",
     "test:watch": "vitest",
-    "coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
@@ -38,7 +41,7 @@
     "@types/node": "^25.0.5",
     "@types/pg": "^8.16.0",
     "@types/supertest": "^6.0.3",
-    "@vitest/coverage-v8": "^4.0.17",
+    "@vitest/coverage-v8": "^4.0.18",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.17"

@@ -1,0 +1,7 @@
+rest_api/node_modules
+rest_api/.*env
+README.md 
+rest_api/db_seed
+rest_api/test
+rest_api/vitest.config.test
+rest_api/README.md 

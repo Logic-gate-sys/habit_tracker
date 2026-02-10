@@ -7,20 +7,17 @@ import { execSync } from 'child_process';
 describe("JWT functionality test", () => {
     // clear console before each test
     execSync("clear", { stdio: 'inherit', cwd: process.cwd() });
-    console.log(":::::::::::::::CLEANED CONSOLE::::::::::")
-
-    it("Should generate & verify JWT successfully given valid data", async () => {
+    test("JWT Function generates and verifies token: ", async () => {
         const data = { id: 'someId', username: 'testuser', email: 'testuser@gmail.com' } as unknown as JWT_Payload
         const token = await generateToken(data);
-        const {payload} =await verifyToken(token);
+        const {payload} = await verifyToken(token)?? {};
 
         // assertions
-        console.log("VERIFIED TOKEN:::::", payload)
         expect(payload).toBeDefined();
         expect(payload).toHaveProperty("id");
     });
 
-    it("Should reject invalid token", async () => {
+    test("Function rejects invalid token: ", async () => {
         const data = { id: 'someId', username: 'testuser', email: 'testuser@gmail.com' } as unknown as JWT_Payload
         const token = await generateToken(data);
         console.log("Token: ", token)
@@ -32,11 +29,8 @@ describe("JWT functionality test", () => {
 });
 
 
-
-
-
-describe("Hashing & Verifying password should be successful", () => {
-    it("Should verify password given valid data", async () => {
+describe("Password hashing & verification", () => {
+    test("Function able to validate password: ", async () => {
         const rawPassword = 'eorodlfeor00w0r';
         const hashed_password = await hashPassword(rawPassword);
         const isvalid = await verifyPassword(rawPassword, hashed_password);
@@ -46,7 +40,7 @@ describe("Hashing & Verifying password should be successful", () => {
         expect(() => hashPassword(rawPassword)).not.toThrow();
     });
 
-    it("Should not verify the wrong password", async () => {
+    test("Function does not validate wrong password: ", async () => {
         const rawPassword = 'se0r0e0r0e0r0r0er';
         const hashed_password = await hashPassword(rawPassword);
 

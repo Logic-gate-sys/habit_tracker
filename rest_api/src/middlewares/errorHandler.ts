@@ -12,7 +12,6 @@ export class APIError extends Error{
         this.status = status;
         this.message = message;
     }
-
 }
 
 export async function errorHandler(error: APIError, req: Request, res: Response, next: NextFunction) {
@@ -26,12 +25,14 @@ export async function errorHandler(error: APIError, req: Request, res: Response,
 
     }
     // errors
-    return res.status(error.status).json({
+    return res.status(status).json({
+        name:name,
         error: message,
-        ...(env.APP_STAGE === 'dev' && {
-            stack: error.stack,
-            details:error.message
-        })
+        details: {
+            stack: (env.APP_STAGE === "dev") ? error.stack : "Uknown",
+            message: (env.APP_STAGE==="dev")? error.message: "Uknown"
+        }
+        
     });
 }
 

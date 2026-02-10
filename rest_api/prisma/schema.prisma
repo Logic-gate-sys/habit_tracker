@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../src/config/generated/prisma"
@@ -13,74 +7,79 @@ datasource db {
   provider = "postgresql"
 }
 
-
 // ------------- HABBIT TRACKER SCHEMA ----------------------
-enum HabitFrequency {
-  DAILY
-  WEEKLY
-  MONTHLY
-}
-
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  user_name  String   @unique
-  password  String
-  first_name String?
-  last_name  String?
+  id         String   @unique @default(uuid())
+  email      String   @unique
+  password   String
+  user_name  String
+  f_name     String?
+  m_name     String?
+  l_name     String?
+  time_zone  String?
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
 
-  habits    Habit[]
-}
-
-model Habit {
-  id           String         @id @default(cuid())
-  user_id      String
-  name        String
-  description String?
-  frequency   HabitFrequency
-  target_count Int?
-  is_active    Boolean        @default(true)
-  created_at   DateTime       @default(now())
-  updated_at   DateTime       @updatedAt
-
-  user        User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  entries     Entry[]
-  tags        HabitTag[]
-}
-
-model Entry {
-  id         String   @id @default(cuid())
-  habit_id    String
-  completion Int
-  note       String?
-  created_at  DateTime @default(now())
-
-  habit      Habit    @relation(fields: [habit_id], references: [id], onDelete: Cascade)
-  @@index([habit_id])
+  habits Habit[] // one user could have 0 or more habits
+  tags   Tag[] // user could have 0 or 1 tags 
 }
 
 model Tag {
-  id        String     @id @default(cuid())
-  name      String     @unique
-  color     String?
-  created_at DateTime   @default(now())
-  updated_at DateTime   @updatedAt
+  id         String   @unique @default(uuid())
+  user_id    String
+  name       String // e.g sports, literature, boxing , beauty, etc
+  color      String // hex representation of tag color code 
+  created_at DateTime @default(now())
 
-  habits    HabitTag[]
+  //relationships 
+  habit Habit[]
+  user  User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
-model HabitTag {
-  id           String   @id @default(cuid())
-  habit_id     String
-  tag_id        String
-  created_id    DateTime @default(now())
+model Habit {
+  id           String    @unique @default(uuid())
+  user_id      String
+  tag_id       String // this specifies which tag a habit sits under 
+  title        String
+  description  String? // optional description
+  frequency    FREQUENCY
+  target_value Float
+  unit         String // e.g., "minutes", "pages": will be validate by middleware
+  sleep        Boolean   @default(false) // an attribute to track habits with consecutive inactivity 
+  res_counter  Int       @default(0) // set when habit sleeps due to inactivity
+  goal_reached Boolean   @default(false) // is the habits goal reached s
+  archived     Boolean   @default(false) // is habit currently archieved : archieve is same as sun-set 
+  badge        BADGE? // completion badge 
+  created_at  DateTime   @default(now())
 
+  //relationship
+  tag  Tag    @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+  user User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  logs Logs[] // one 0:m  habit->logs
+}
 
-  habit    Habit @relation(fields: [habit_id], references: [id], onDelete: Cascade)
-  tag      Tag   @relation(fields: [tag_id], references: [id], onDelete: Cascade)
-  @@unique([habit_id, tag_id])
-  @@index([habit_id])
-  @@index([tag_id])
+model Logs {
+  id         String    @unique @default(uuid())
+  habit_id   String
+  value      String // value of the goal achieved 
+  note       String? // note of completion
+  created_at DateTime  @default(now())
+  updated_at DateTime? // when an entry is updated: UTC time only
+
+  habit Habit @relation(fields: [habit_id], references: [id], onDelete: Cascade)
+}
+
+//::::::::::::::::: enums ::::::::::::::::::::::::::::::::::
+enum BADGE {
+  JEDI
+  MASTERY
+  COLONEL
+  JUNIOR // with 4 streak loses
+  AMATEUR // with 5 + streak loses
+}
+
+enum FREQUENCY {
+  DAILY
+  WEEKLY
+  MONTHLY
+  OTHER // other includes custom frequencies , like 2 times a week etc, MON,TUE,WEN etc
 }

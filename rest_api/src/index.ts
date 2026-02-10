@@ -1,4 +1,4 @@
-import app from './sever.ts'
+import {app} from './server.ts'
 const port = 3000;
 import { env } from './../env.ts'
 

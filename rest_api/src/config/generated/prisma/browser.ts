@@ -23,22 +23,17 @@ export * from './enums.ts';
  */
 export type User = Prisma.UserModel
 /**
- * Model Habit
- * 
- */
-export type Habit = Prisma.HabitModel
-/**
- * Model Entry
- * 
- */
-export type Entry = Prisma.EntryModel
-/**
  * Model Tag
  * 
  */
 export type Tag = Prisma.TagModel
 /**
- * Model HabitTag
+ * Model Habit
  * 
  */
-export type HabitTag = Prisma.HabitTagModel
+export type Habit = Prisma.HabitModel
+/**
+ * Model Logs
+ * 
+ */
+export type Logs = Prisma.LogsModel
