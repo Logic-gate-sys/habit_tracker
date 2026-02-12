@@ -6,7 +6,8 @@ import { authRouter } from './routes/authRoutes.ts';
 import { isTest } from '../env.ts';
 import { errorHandler, notFoundError } from './middlewares/errorHandler.ts';
 import { tagRouter } from './routes/tagRoutes.ts';
-import { habitRouter } from './routes/habitRoutes.ts'
+import { habitRouter } from './routes/habitRoutes.ts';
+import { logRouter } from './routes/logRoutes.ts';
 
 
 
@@ -32,6 +33,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/tags', tagRouter); 
 //habit 
 app.use('/api/habits', habitRouter);
+// logs
+app.use('/api/logs', logRouter); 
 
 // error handlers
 app.use(errorHandler);

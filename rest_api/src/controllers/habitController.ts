@@ -1,15 +1,21 @@
 import { prisma } from "../config/prisma.ts";
 import type { Request, Response } from "express";
 import { FREQUENCY } from "../config/generated/prisma/enums.ts";
-import { serializeJsonQuery } from "@prisma/client/runtime/client";
-import { success } from "zod";
-import { rmSync } from "node:fs";
+import { env } from './../../env.ts';
 
 export async function createHabit(req: Request, res: Response) {
     try {
+        const MAX_ACTIVE_HABITS = env.MAX_ACTIVE_HABITS || 10; 
         const { id } = req.user as unknown as string;
         const { tagId, title, description, frequency, targetValue, uint } = req.body; 
-
+        const totalHabits = await prisma.habit.count({where:{archived: false}});
+        if (totalHabits >= MAX_ACTIVE_HABITS) {
+            return res.status(400).json({
+                success: false, 
+                error: 'Active habit limit reached! ',
+                message:'You have more than the recommended active habits, consider archiving a habit'
+            })
+        }
         let freq: FREQUENCY; 
         switch (frequency) {
             case 'DAILY':
@@ -55,14 +61,15 @@ export async function getHabits(req: Request, res: Response) {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 12;
         const { id } = req.user;
-        const totalHabits = await prisma.habit.count();
+        const totalHabits = await prisma.habit.count({where:{archived: false}});
         if (!totalHabits) {
             return res.status(404).json({ error: 'No habits', message: 'You might consider creating some habits' })
         }
+        
         const startIndex = (page - 1) * limit;
  
         const habits = await prisma.habit.findMany({
-            where: { user_id: id },
+            where: { user_id: id, archived:false },
             select: {
                 id: true,
                 tag_id: true,
@@ -71,11 +78,7 @@ export async function getHabits(req: Request, res: Response) {
                 frequency: true,
                 target_value: true,
                 unit: true,
-                sleep: true,
-                res_counter: true,
                 goal_reached: true,
-                archived: true,
-                badge: true,
                 created_at:true
             },
             skip: startIndex,

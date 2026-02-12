@@ -23,7 +23,8 @@ const envSchema = z.object({
     JWT_SECRET: z.string().min(32, 'must be atleast 32'),
     JWT_EXPIRES_IN: z.string().default('7d'),
     BECRYPT_ROTATE: z.coerce.number().min(10).max(12),
-    BCRYPT_ROUNDS: z.coerce.number().min(12)
+    BCRYPT_ROUNDS: z.coerce.number().min(12),
+    MAX_ACTIVE_HABITS:z.coerce.number()
 })
 
 // export envschema type

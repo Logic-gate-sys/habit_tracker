@@ -144,6 +144,50 @@ export async function createTestBulkHabit(userId: string, tagIds: string[]) {
   }
 }
 
+// logs
+export async function createTestBulkLogs(habitId: string) {
+  try {
+    const logsData = [0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, idx) => ({
+      habit_id: habitId,
+      value: `Daily Reading ${idx + 1}`,
+      note: `Notes ${idx + 1}`
+    }))
+    // bulk create
+    const logs = await prisma.logs.createMany({
+      data: logsData,
+      skipDuplicates: true
+    });
+
+    // final return 
+    return { 
+      success: true, 
+      count: logs.count 
+    };
+  } catch (err) {
+     console.error("Bulk Logs Error: ", err.message);
+    return { success: false, error: err.message };
+  }
+}
+
+export async function createTestLog(habitId: string) {
+  try {
+    const logs_data = {
+        habit_id : habitId,
+        value: 'Made some sauges',
+        note: 'I love what I did today,I should to more of this often'
+    }
+    const newLog = await prisma.logs.create({
+      data: {
+        ...logs_data
+      }
+    });
+
+    // return 
+    return {newLog, success:true}
+  } catch (err) {
+    throw new Error(err.message)
+  }
+}
 // cleanup after each test
 export async function cleanupDB() {
   try {

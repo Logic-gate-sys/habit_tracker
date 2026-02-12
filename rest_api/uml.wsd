@@ -1,0 +1,20 @@
+@startuml
+testdot
+Bob -> Alice : hello
+
+class Employee{
+     - static String department = "R&D"
+     - Int age
+}
+
+class Customer{
+-String id
+-String name 
+-Double age 
+-Char sex 
++static String relations
+}
+
+@enduml 
+
+

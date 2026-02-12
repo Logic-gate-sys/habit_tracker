@@ -49,6 +49,18 @@ export const updateHabitSchema = z.object({
     unit: z.string().min(3).optional() 
 })
 
+//logs
+export const createLogsSchema = z.object({
+    habitId: z.string(),
+    value: z.string(),
+    note: z.string().min(5)
+});
+
+export const updateLogSchema = z.object({
+    value: z.string().optional(),
+    note:z.string().optional()
+})
+
 //params
 export const paramSchema = z.object({
     id: z.string()
