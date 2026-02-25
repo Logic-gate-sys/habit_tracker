@@ -106,13 +106,18 @@ export const HabitScalarFieldEnum = {
   title: 'title',
   description: 'description',
   frequency: 'frequency',
+  custom_days: 'custom_days',
   target_value: 'target_value',
+  unit_type: 'unit_type',
   unit: 'unit',
   sleep: 'sleep',
   res_counter: 'res_counter',
   goal_reached: 'goal_reached',
   archived: 'archived',
+  freeze_times: 'freeze_times',
   badge: 'badge',
+  streak: 'streak',
+  streak_history: 'streak_history',
   created_at: 'created_at'
 } as const
 

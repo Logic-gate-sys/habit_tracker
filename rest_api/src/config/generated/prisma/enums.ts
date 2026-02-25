@@ -20,6 +20,16 @@ export const BADGE = {
 export type BADGE = (typeof BADGE)[keyof typeof BADGE]
 
 
+export const UNIT_TYPE = {
+  COUNT: 'COUNT',
+  DURATION: 'DURATION',
+  BOOLEAN: 'BOOLEAN',
+  DEFAULT: 'DEFAULT'
+} as const
+
+export type UNIT_TYPE = (typeof UNIT_TYPE)[keyof typeof UNIT_TYPE]
+
+
 export const FREQUENCY = {
   DAILY: 'DAILY',
   WEEKLY: 'WEEKLY',

@@ -9,7 +9,8 @@ import {
   createTestBulkHabit
 } from "./helpers/testHelpers.ts";
 
-describe("Habits test", () => {
+
+describe("Habit Tests ", () => {
   describe("GET: /api/habits", () => {
     afterEach(async () => {
       await cleanupDB();
@@ -93,6 +94,7 @@ describe("Habits test", () => {
         title: "Daily Reading",
         description: "Read at least 100 pages of a non-fiction book.",
         frequency: "daily",
+        unitsType:"COUNTS",
         targetValue: 100,
         uint: "pages",
       };
@@ -201,6 +203,7 @@ describe("Habits test", () => {
       expect(res.body).toBeDefined();
       expect(res.body).toHaveProperty("message", "Habit updated successfully");
     });
+    
 
     test("Unauthorized user cannot update habit", async () => {
       const { token, newUser } = (await createTestUser()) ?? {};
@@ -241,9 +244,10 @@ describe("Habits test", () => {
       await cleanupDB();
     });
 
-    test("User should be able to delete their habit", async () => {
+    test("User can get habit back after soft delete: ", async () => {
       const { token, newUser } = (await createTestUser()) ?? {};
       // Safety check: Ensure the helper actually worked
+      const restore = 'true';
       if (!token || !newUser) {
         throw new Error("Test setup failed: Token not generated");
       }
@@ -257,14 +261,47 @@ describe("Habits test", () => {
       }
 
       const res = await request(app)
-        .delete(`/api/habits/${newHabit.id}`)
+        .delete(`/api/habits/archive/${newHabit.id}`)
+        .set("authorization", `Bearer ${token}`)
+        .expect(200);
+
+      const restoreRes = await request(app)
+        .post(`/api/habits/restore/${newHabit.id}?restore=${restore}`)
+        .set("authorization", `Bearer ${token}`)
+        .expect(200);
+      
+      // validation
+      expect(res.body).toBeDefined();
+      expect(res.body).toHaveProperty("message", "Habit archived successfully");
+      expect(restoreRes.body).toHaveProperty('message', 'Habit restored successfully');
+    });
+
+    test("Hard delete of habit ", async () => {
+       const { token, newUser } = (await createTestUser()) ?? {};
+      // Safety check: Ensure the helper actually worked
+      if (!token || !newUser) {
+        throw new Error("Test setup failed: Token not generated");
+      }
+      const { tag } = (await createTestTag(newUser.id)) ?? {};
+      if (!tag) {
+        throw new Error("Test setup failed: tag not created");
+      }
+      const { newHabit } = (await createTestHabit(newUser.id, tag.id)) ?? {};
+      if (!newHabit) {
+        throw new Error("Error: failed to create test habit");
+      }
+      const hard = 'true';
+      const permanent = 'true'; 
+
+      const res = await request(app)
+        .delete(`/api/habits/hard/${newHabit.id}?hard=${hard}&permanent=${permanent}`)
         .set("authorization", `Bearer ${token}`)
         .expect(200);
 
       // validation
       expect(res.body).toBeDefined();
-      expect(res.body).toHaveProperty("message", "Habit deleted successfully");
-    });
+      expect(res.body).toHaveProperty('message','Habit deleted permanently');
+    })
 
     test("Unauthorized user should be able to delete habit", async () => {
       const { token, newUser } = (await createTestUser()) ?? {};

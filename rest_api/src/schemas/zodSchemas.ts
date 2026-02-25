@@ -1,6 +1,6 @@
 import { xContentTypeOptions } from 'helmet';
 import { z } from 'zod';
-import { FREQUENCY } from '../config/generated/prisma/enums';
+import { FREQUENCY } from '../config/generated/prisma/enums.ts';
 
 
 //user 
@@ -36,8 +36,9 @@ export const createHabitSchema = z.object({
     title: z.string().min(3),
     description: z.string().min(10),
     frequency: z.string(),
+    unitsType: z.enum(['COUNTS','DEFAULT','DURATION','BOOLEAN']),
     targetValue: z.coerce.number(),
-    uint: z.string().min(3)
+    unit: z.string().min(3)
 });
 
 export const updateHabitSchema = z.object({
@@ -69,7 +70,9 @@ export const paramSchema = z.object({
 //query
 export const querySchema = z.object({
     page: z.coerce.number().optional(),
-    limit: z.coerce.number().optional()
+    limit: z.coerce.number().optional(),
+    hard: z.string().optional(),
+    permanent: z.string().optional()
 })
 
 

@@ -11,7 +11,7 @@ import {
 } from "./helpers/testHelpers.ts";
 import { after } from "node:test";
 
-describe("Logs ", () => {
+describe("Logs Test", () => {
   describe("GET:  /api/logs", () => {
     afterEach(async () => {
       await cleanupDB();

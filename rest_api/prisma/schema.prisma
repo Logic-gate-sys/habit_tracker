@@ -38,18 +38,24 @@ model Tag {
 model Habit {
   id           String    @unique @default(uuid())
   user_id      String
-  tag_id       String // this specifies which tag a habit sits under 
+  tag_id       String   // this specifies which tag a habit sits under 
   title        String
-  description  String? // optional description
+  description  String?   // optional description
   frequency    FREQUENCY
+  custom_days  String[] @default([])
   target_value Float
-  unit         String // e.g., "minutes", "pages": will be validate by middleware
+  unit_type    UNIT_TYPE? // OPTIONAL UNIT TYPE 
+  unit         String    // e.g., "minutes", "pages": will be validate by middleware
   sleep        Boolean   @default(false) // an attribute to track habits with consecutive inactivity 
   res_counter  Int       @default(0) // set when habit sleeps due to inactivity
   goal_reached Boolean   @default(false) // is the habits goal reached s
   archived     Boolean   @default(false) // is habit currently archieved : archieve is same as sun-set 
-  badge        BADGE? // completion badge 
-  created_at  DateTime   @default(now())
+  freeze_times DateTime[]   // store times each strap of habit was updated a new one started
+  badge        BADGE?    //completion badge 
+  streak       Int?   @default(0)// streak begins with intial log 
+  streak_history DateTime[] @default([]) // streak history empty at the begining 
+  created_at     DateTime  @default(now())
+
 
   //relationship
   tag  Tag    @relation(fields: [tag_id], references: [id], onDelete: Cascade)
@@ -77,6 +83,12 @@ enum BADGE {
   AMATEUR // with 5 + streak loses
 }
 
+enum UNIT_TYPE {
+  COUNT
+  DURATION
+  BOOLEAN
+  DEFAULT
+}
 enum FREQUENCY {
   DAILY
   WEEKLY

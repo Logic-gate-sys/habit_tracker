@@ -29,11 +29,13 @@ export type AggregateHabit = {
 export type HabitAvgAggregateOutputType = {
   target_value: number | null
   res_counter: number | null
+  streak: number | null
 }
 
 export type HabitSumAggregateOutputType = {
   target_value: number | null
   res_counter: number | null
+  streak: number | null
 }
 
 export type HabitMinAggregateOutputType = {
@@ -44,12 +46,14 @@ export type HabitMinAggregateOutputType = {
   description: string | null
   frequency: $Enums.FREQUENCY | null
   target_value: number | null
+  unit_type: $Enums.UNIT_TYPE | null
   unit: string | null
   sleep: boolean | null
   res_counter: number | null
   goal_reached: boolean | null
   archived: boolean | null
   badge: $Enums.BADGE | null
+  streak: number | null
   created_at: Date | null
 }
 
@@ -61,12 +65,14 @@ export type HabitMaxAggregateOutputType = {
   description: string | null
   frequency: $Enums.FREQUENCY | null
   target_value: number | null
+  unit_type: $Enums.UNIT_TYPE | null
   unit: string | null
   sleep: boolean | null
   res_counter: number | null
   goal_reached: boolean | null
   archived: boolean | null
   badge: $Enums.BADGE | null
+  streak: number | null
   created_at: Date | null
 }
 
@@ -77,13 +83,18 @@ export type HabitCountAggregateOutputType = {
   title: number
   description: number
   frequency: number
+  custom_days: number
   target_value: number
+  unit_type: number
   unit: number
   sleep: number
   res_counter: number
   goal_reached: number
   archived: number
+  freeze_times: number
   badge: number
+  streak: number
+  streak_history: number
   created_at: number
   _all: number
 }
@@ -92,11 +103,13 @@ export type HabitCountAggregateOutputType = {
 export type HabitAvgAggregateInputType = {
   target_value?: true
   res_counter?: true
+  streak?: true
 }
 
 export type HabitSumAggregateInputType = {
   target_value?: true
   res_counter?: true
+  streak?: true
 }
 
 export type HabitMinAggregateInputType = {
@@ -107,12 +120,14 @@ export type HabitMinAggregateInputType = {
   description?: true
   frequency?: true
   target_value?: true
+  unit_type?: true
   unit?: true
   sleep?: true
   res_counter?: true
   goal_reached?: true
   archived?: true
   badge?: true
+  streak?: true
   created_at?: true
 }
 
@@ -124,12 +139,14 @@ export type HabitMaxAggregateInputType = {
   description?: true
   frequency?: true
   target_value?: true
+  unit_type?: true
   unit?: true
   sleep?: true
   res_counter?: true
   goal_reached?: true
   archived?: true
   badge?: true
+  streak?: true
   created_at?: true
 }
 
@@ -140,13 +157,18 @@ export type HabitCountAggregateInputType = {
   title?: true
   description?: true
   frequency?: true
+  custom_days?: true
   target_value?: true
+  unit_type?: true
   unit?: true
   sleep?: true
   res_counter?: true
   goal_reached?: true
   archived?: true
+  freeze_times?: true
   badge?: true
+  streak?: true
+  streak_history?: true
   created_at?: true
   _all?: true
 }
@@ -244,13 +266,18 @@ export type HabitGroupByOutputType = {
   title: string
   description: string | null
   frequency: $Enums.FREQUENCY
+  custom_days: string[]
   target_value: number
+  unit_type: $Enums.UNIT_TYPE | null
   unit: string
   sleep: boolean
   res_counter: number
   goal_reached: boolean
   archived: boolean
+  freeze_times: Date[]
   badge: $Enums.BADGE | null
+  streak: number | null
+  streak_history: Date[]
   created_at: Date
   _count: HabitCountAggregateOutputType | null
   _avg: HabitAvgAggregateOutputType | null
@@ -284,13 +311,18 @@ export type HabitWhereInput = {
   title?: Prisma.StringFilter<"Habit"> | string
   description?: Prisma.StringNullableFilter<"Habit"> | string | null
   frequency?: Prisma.EnumFREQUENCYFilter<"Habit"> | $Enums.FREQUENCY
+  custom_days?: Prisma.StringNullableListFilter<"Habit">
   target_value?: Prisma.FloatFilter<"Habit"> | number
+  unit_type?: Prisma.EnumUNIT_TYPENullableFilter<"Habit"> | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFilter<"Habit"> | string
   sleep?: Prisma.BoolFilter<"Habit"> | boolean
   res_counter?: Prisma.IntFilter<"Habit"> | number
   goal_reached?: Prisma.BoolFilter<"Habit"> | boolean
   archived?: Prisma.BoolFilter<"Habit"> | boolean
+  freeze_times?: Prisma.DateTimeNullableListFilter<"Habit">
   badge?: Prisma.EnumBADGENullableFilter<"Habit"> | $Enums.BADGE | null
+  streak?: Prisma.IntNullableFilter<"Habit"> | number | null
+  streak_history?: Prisma.DateTimeNullableListFilter<"Habit">
   created_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -304,13 +336,18 @@ export type HabitOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   frequency?: Prisma.SortOrder
+  custom_days?: Prisma.SortOrder
   target_value?: Prisma.SortOrder
+  unit_type?: Prisma.SortOrderInput | Prisma.SortOrder
   unit?: Prisma.SortOrder
   sleep?: Prisma.SortOrder
   res_counter?: Prisma.SortOrder
   goal_reached?: Prisma.SortOrder
   archived?: Prisma.SortOrder
+  freeze_times?: Prisma.SortOrder
   badge?: Prisma.SortOrderInput | Prisma.SortOrder
+  streak?: Prisma.SortOrderInput | Prisma.SortOrder
+  streak_history?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   tag?: Prisma.TagOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
@@ -327,13 +364,18 @@ export type HabitWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Habit"> | string
   description?: Prisma.StringNullableFilter<"Habit"> | string | null
   frequency?: Prisma.EnumFREQUENCYFilter<"Habit"> | $Enums.FREQUENCY
+  custom_days?: Prisma.StringNullableListFilter<"Habit">
   target_value?: Prisma.FloatFilter<"Habit"> | number
+  unit_type?: Prisma.EnumUNIT_TYPENullableFilter<"Habit"> | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFilter<"Habit"> | string
   sleep?: Prisma.BoolFilter<"Habit"> | boolean
   res_counter?: Prisma.IntFilter<"Habit"> | number
   goal_reached?: Prisma.BoolFilter<"Habit"> | boolean
   archived?: Prisma.BoolFilter<"Habit"> | boolean
+  freeze_times?: Prisma.DateTimeNullableListFilter<"Habit">
   badge?: Prisma.EnumBADGENullableFilter<"Habit"> | $Enums.BADGE | null
+  streak?: Prisma.IntNullableFilter<"Habit"> | number | null
+  streak_history?: Prisma.DateTimeNullableListFilter<"Habit">
   created_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -347,13 +389,18 @@ export type HabitOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   frequency?: Prisma.SortOrder
+  custom_days?: Prisma.SortOrder
   target_value?: Prisma.SortOrder
+  unit_type?: Prisma.SortOrderInput | Prisma.SortOrder
   unit?: Prisma.SortOrder
   sleep?: Prisma.SortOrder
   res_counter?: Prisma.SortOrder
   goal_reached?: Prisma.SortOrder
   archived?: Prisma.SortOrder
+  freeze_times?: Prisma.SortOrder
   badge?: Prisma.SortOrderInput | Prisma.SortOrder
+  streak?: Prisma.SortOrderInput | Prisma.SortOrder
+  streak_history?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.HabitCountOrderByAggregateInput
   _avg?: Prisma.HabitAvgOrderByAggregateInput
@@ -372,13 +419,18 @@ export type HabitScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Habit"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Habit"> | string | null
   frequency?: Prisma.EnumFREQUENCYWithAggregatesFilter<"Habit"> | $Enums.FREQUENCY
+  custom_days?: Prisma.StringNullableListFilter<"Habit">
   target_value?: Prisma.FloatWithAggregatesFilter<"Habit"> | number
+  unit_type?: Prisma.EnumUNIT_TYPENullableWithAggregatesFilter<"Habit"> | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringWithAggregatesFilter<"Habit"> | string
   sleep?: Prisma.BoolWithAggregatesFilter<"Habit"> | boolean
   res_counter?: Prisma.IntWithAggregatesFilter<"Habit"> | number
   goal_reached?: Prisma.BoolWithAggregatesFilter<"Habit"> | boolean
   archived?: Prisma.BoolWithAggregatesFilter<"Habit"> | boolean
+  freeze_times?: Prisma.DateTimeNullableListFilter<"Habit">
   badge?: Prisma.EnumBADGENullableWithAggregatesFilter<"Habit"> | $Enums.BADGE | null
+  streak?: Prisma.IntNullableWithAggregatesFilter<"Habit"> | number | null
+  streak_history?: Prisma.DateTimeNullableListFilter<"Habit">
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Habit"> | Date | string
 }
 
@@ -387,13 +439,18 @@ export type HabitCreateInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
   tag: Prisma.TagCreateNestedOneWithoutHabitInput
   user: Prisma.UserCreateNestedOneWithoutHabitsInput
@@ -407,13 +464,18 @@ export type HabitUncheckedCreateInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
   logs?: Prisma.LogsUncheckedCreateNestedManyWithoutHabitInput
 }
@@ -423,13 +485,18 @@ export type HabitUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tag?: Prisma.TagUpdateOneRequiredWithoutHabitNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHabitsNestedInput
@@ -443,13 +510,18 @@ export type HabitUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.LogsUncheckedUpdateManyWithoutHabitNestedInput
 }
@@ -461,13 +533,18 @@ export type HabitCreateManyInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
 }
 
@@ -476,13 +553,18 @@ export type HabitUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -493,13 +575,18 @@ export type HabitUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -513,6 +600,22 @@ export type HabitOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
+export type DateTimeNullableListFilter<$PrismaModel = never> = {
+  equals?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  has?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
+  hasEvery?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel>
+  hasSome?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type HabitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
@@ -520,19 +623,25 @@ export type HabitCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
+  custom_days?: Prisma.SortOrder
   target_value?: Prisma.SortOrder
+  unit_type?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   sleep?: Prisma.SortOrder
   res_counter?: Prisma.SortOrder
   goal_reached?: Prisma.SortOrder
   archived?: Prisma.SortOrder
+  freeze_times?: Prisma.SortOrder
   badge?: Prisma.SortOrder
+  streak?: Prisma.SortOrder
+  streak_history?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
 export type HabitAvgOrderByAggregateInput = {
   target_value?: Prisma.SortOrder
   res_counter?: Prisma.SortOrder
+  streak?: Prisma.SortOrder
 }
 
 export type HabitMaxOrderByAggregateInput = {
@@ -543,12 +652,14 @@ export type HabitMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
   target_value?: Prisma.SortOrder
+  unit_type?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   sleep?: Prisma.SortOrder
   res_counter?: Prisma.SortOrder
   goal_reached?: Prisma.SortOrder
   archived?: Prisma.SortOrder
   badge?: Prisma.SortOrder
+  streak?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -560,18 +671,21 @@ export type HabitMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
   target_value?: Prisma.SortOrder
+  unit_type?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   sleep?: Prisma.SortOrder
   res_counter?: Prisma.SortOrder
   goal_reached?: Prisma.SortOrder
   archived?: Prisma.SortOrder
   badge?: Prisma.SortOrder
+  streak?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
 export type HabitSumOrderByAggregateInput = {
   target_value?: Prisma.SortOrder
   res_counter?: Prisma.SortOrder
+  streak?: Prisma.SortOrder
 }
 
 export type HabitScalarRelationFilter = {
@@ -663,8 +777,25 @@ export type HabitUncheckedUpdateManyWithoutTagNestedInput = {
   deleteMany?: Prisma.HabitScalarWhereInput | Prisma.HabitScalarWhereInput[]
 }
 
+export type HabitCreatecustom_daysInput = {
+  set: string[]
+}
+
+export type HabitCreatefreeze_timesInput = {
+  set: Date[] | string[]
+}
+
+export type HabitCreatestreak_historyInput = {
+  set: Date[] | string[]
+}
+
 export type EnumFREQUENCYFieldUpdateOperationsInput = {
   set?: $Enums.FREQUENCY
+}
+
+export type HabitUpdatecustom_daysInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type FloatFieldUpdateOperationsInput = {
@@ -673,6 +804,10 @@ export type FloatFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type NullableEnumUNIT_TYPEFieldUpdateOperationsInput = {
+  set?: $Enums.UNIT_TYPE | null
 }
 
 export type BoolFieldUpdateOperationsInput = {
@@ -687,8 +822,26 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type HabitUpdatefreeze_timesInput = {
+  set?: Date[] | string[]
+  push?: Date | string | Date[] | string[]
+}
+
 export type NullableEnumBADGEFieldUpdateOperationsInput = {
   set?: $Enums.BADGE | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type HabitUpdatestreak_historyInput = {
+  set?: Date[] | string[]
+  push?: Date | string | Date[] | string[]
 }
 
 export type HabitCreateNestedOneWithoutLogsInput = {
@@ -710,13 +863,18 @@ export type HabitCreateWithoutUserInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
   tag: Prisma.TagCreateNestedOneWithoutHabitInput
   logs?: Prisma.LogsCreateNestedManyWithoutHabitInput
@@ -728,13 +886,18 @@ export type HabitUncheckedCreateWithoutUserInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
   logs?: Prisma.LogsUncheckedCreateNestedManyWithoutHabitInput
 }
@@ -775,13 +938,18 @@ export type HabitScalarWhereInput = {
   title?: Prisma.StringFilter<"Habit"> | string
   description?: Prisma.StringNullableFilter<"Habit"> | string | null
   frequency?: Prisma.EnumFREQUENCYFilter<"Habit"> | $Enums.FREQUENCY
+  custom_days?: Prisma.StringNullableListFilter<"Habit">
   target_value?: Prisma.FloatFilter<"Habit"> | number
+  unit_type?: Prisma.EnumUNIT_TYPENullableFilter<"Habit"> | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFilter<"Habit"> | string
   sleep?: Prisma.BoolFilter<"Habit"> | boolean
   res_counter?: Prisma.IntFilter<"Habit"> | number
   goal_reached?: Prisma.BoolFilter<"Habit"> | boolean
   archived?: Prisma.BoolFilter<"Habit"> | boolean
+  freeze_times?: Prisma.DateTimeNullableListFilter<"Habit">
   badge?: Prisma.EnumBADGENullableFilter<"Habit"> | $Enums.BADGE | null
+  streak?: Prisma.IntNullableFilter<"Habit"> | number | null
+  streak_history?: Prisma.DateTimeNullableListFilter<"Habit">
   created_at?: Prisma.DateTimeFilter<"Habit"> | Date | string
 }
 
@@ -790,13 +958,18 @@ export type HabitCreateWithoutTagInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutHabitsInput
   logs?: Prisma.LogsCreateNestedManyWithoutHabitInput
@@ -808,13 +981,18 @@ export type HabitUncheckedCreateWithoutTagInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
   logs?: Prisma.LogsUncheckedCreateNestedManyWithoutHabitInput
 }
@@ -850,13 +1028,18 @@ export type HabitCreateWithoutLogsInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
   tag: Prisma.TagCreateNestedOneWithoutHabitInput
   user: Prisma.UserCreateNestedOneWithoutHabitsInput
@@ -869,13 +1052,18 @@ export type HabitUncheckedCreateWithoutLogsInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
 }
 
@@ -900,13 +1088,18 @@ export type HabitUpdateWithoutLogsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tag?: Prisma.TagUpdateOneRequiredWithoutHabitNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHabitsNestedInput
@@ -919,13 +1112,18 @@ export type HabitUncheckedUpdateWithoutLogsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -935,13 +1133,18 @@ export type HabitCreateManyUserInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
 }
 
@@ -950,13 +1153,18 @@ export type HabitUpdateWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tag?: Prisma.TagUpdateOneRequiredWithoutHabitNestedInput
   logs?: Prisma.LogsUpdateManyWithoutHabitNestedInput
@@ -968,13 +1176,18 @@ export type HabitUncheckedUpdateWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.LogsUncheckedUpdateManyWithoutHabitNestedInput
 }
@@ -985,13 +1198,18 @@ export type HabitUncheckedUpdateManyWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1001,13 +1219,18 @@ export type HabitCreateManyTagInput = {
   title: string
   description?: string | null
   frequency: $Enums.FREQUENCY
+  custom_days?: Prisma.HabitCreatecustom_daysInput | string[]
   target_value: number
+  unit_type?: $Enums.UNIT_TYPE | null
   unit: string
   sleep?: boolean
   res_counter?: number
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: Prisma.HabitCreatefreeze_timesInput | Date[] | string[]
   badge?: $Enums.BADGE | null
+  streak?: number | null
+  streak_history?: Prisma.HabitCreatestreak_historyInput | Date[] | string[]
   created_at?: Date | string
 }
 
@@ -1016,13 +1239,18 @@ export type HabitUpdateWithoutTagInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutHabitsNestedInput
   logs?: Prisma.LogsUpdateManyWithoutHabitNestedInput
@@ -1034,13 +1262,18 @@ export type HabitUncheckedUpdateWithoutTagInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.LogsUncheckedUpdateManyWithoutHabitNestedInput
 }
@@ -1051,13 +1284,18 @@ export type HabitUncheckedUpdateManyWithoutTagInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frequency?: Prisma.EnumFREQUENCYFieldUpdateOperationsInput | $Enums.FREQUENCY
+  custom_days?: Prisma.HabitUpdatecustom_daysInput | string[]
   target_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit_type?: Prisma.NullableEnumUNIT_TYPEFieldUpdateOperationsInput | $Enums.UNIT_TYPE | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   sleep?: Prisma.BoolFieldUpdateOperationsInput | boolean
   res_counter?: Prisma.IntFieldUpdateOperationsInput | number
   goal_reached?: Prisma.BoolFieldUpdateOperationsInput | boolean
   archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeze_times?: Prisma.HabitUpdatefreeze_timesInput | Date[] | string[]
   badge?: Prisma.NullableEnumBADGEFieldUpdateOperationsInput | $Enums.BADGE | null
+  streak?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  streak_history?: Prisma.HabitUpdatestreak_historyInput | Date[] | string[]
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1099,13 +1337,18 @@ export type HabitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   title?: boolean
   description?: boolean
   frequency?: boolean
+  custom_days?: boolean
   target_value?: boolean
+  unit_type?: boolean
   unit?: boolean
   sleep?: boolean
   res_counter?: boolean
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: boolean
   badge?: boolean
+  streak?: boolean
+  streak_history?: boolean
   created_at?: boolean
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1120,13 +1363,18 @@ export type HabitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   title?: boolean
   description?: boolean
   frequency?: boolean
+  custom_days?: boolean
   target_value?: boolean
+  unit_type?: boolean
   unit?: boolean
   sleep?: boolean
   res_counter?: boolean
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: boolean
   badge?: boolean
+  streak?: boolean
+  streak_history?: boolean
   created_at?: boolean
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1139,13 +1387,18 @@ export type HabitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   title?: boolean
   description?: boolean
   frequency?: boolean
+  custom_days?: boolean
   target_value?: boolean
+  unit_type?: boolean
   unit?: boolean
   sleep?: boolean
   res_counter?: boolean
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: boolean
   badge?: boolean
+  streak?: boolean
+  streak_history?: boolean
   created_at?: boolean
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1158,17 +1411,22 @@ export type HabitSelectScalar = {
   title?: boolean
   description?: boolean
   frequency?: boolean
+  custom_days?: boolean
   target_value?: boolean
+  unit_type?: boolean
   unit?: boolean
   sleep?: boolean
   res_counter?: boolean
   goal_reached?: boolean
   archived?: boolean
+  freeze_times?: boolean
   badge?: boolean
+  streak?: boolean
+  streak_history?: boolean
   created_at?: boolean
 }
 
-export type HabitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "tag_id" | "title" | "description" | "frequency" | "target_value" | "unit" | "sleep" | "res_counter" | "goal_reached" | "archived" | "badge" | "created_at", ExtArgs["result"]["habit"]>
+export type HabitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "tag_id" | "title" | "description" | "frequency" | "custom_days" | "target_value" | "unit_type" | "unit" | "sleep" | "res_counter" | "goal_reached" | "archived" | "freeze_times" | "badge" | "streak" | "streak_history" | "created_at", ExtArgs["result"]["habit"]>
 export type HabitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1198,13 +1456,18 @@ export type $HabitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     title: string
     description: string | null
     frequency: $Enums.FREQUENCY
+    custom_days: string[]
     target_value: number
+    unit_type: $Enums.UNIT_TYPE | null
     unit: string
     sleep: boolean
     res_counter: number
     goal_reached: boolean
     archived: boolean
+    freeze_times: Date[]
     badge: $Enums.BADGE | null
+    streak: number | null
+    streak_history: Date[]
     created_at: Date
   }, ExtArgs["result"]["habit"]>
   composites: {}
@@ -1638,13 +1901,18 @@ export interface HabitFieldRefs {
   readonly title: Prisma.FieldRef<"Habit", 'String'>
   readonly description: Prisma.FieldRef<"Habit", 'String'>
   readonly frequency: Prisma.FieldRef<"Habit", 'FREQUENCY'>
+  readonly custom_days: Prisma.FieldRef<"Habit", 'String[]'>
   readonly target_value: Prisma.FieldRef<"Habit", 'Float'>
+  readonly unit_type: Prisma.FieldRef<"Habit", 'UNIT_TYPE'>
   readonly unit: Prisma.FieldRef<"Habit", 'String'>
   readonly sleep: Prisma.FieldRef<"Habit", 'Boolean'>
   readonly res_counter: Prisma.FieldRef<"Habit", 'Int'>
   readonly goal_reached: Prisma.FieldRef<"Habit", 'Boolean'>
   readonly archived: Prisma.FieldRef<"Habit", 'Boolean'>
+  readonly freeze_times: Prisma.FieldRef<"Habit", 'DateTime[]'>
   readonly badge: Prisma.FieldRef<"Habit", 'BADGE'>
+  readonly streak: Prisma.FieldRef<"Habit", 'Int'>
+  readonly streak_history: Prisma.FieldRef<"Habit", 'DateTime[]'>
   readonly created_at: Prisma.FieldRef<"Habit", 'DateTime'>
 }
     

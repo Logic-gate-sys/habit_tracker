@@ -10,7 +10,6 @@ import { habitRouter } from './routes/habitRoutes.ts';
 import { logRouter } from './routes/logRoutes.ts';
 
 
-
 const app = express();
 // global middlewares 
 app.use(helmet()); // handles security to prevent common vulnerabilities
@@ -18,6 +17,7 @@ app.use(morgan('combined', { skip: isTest() })); // morgan handles logging all a
 app.use(cors({ origin: '*' })) // handle CORS
 app.use(express.json()); // form json body of all request bodies
 app.use(express.urlencoded({ extended: true })); // allows express to to decipher all url endcodings to unders and decode params
+
 
 app.use('/health', (req, res) => {
     res.status(200).json({

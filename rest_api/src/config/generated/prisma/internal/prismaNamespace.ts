@@ -775,13 +775,18 @@ export const HabitScalarFieldEnum = {
   title: 'title',
   description: 'description',
   frequency: 'frequency',
+  custom_days: 'custom_days',
   target_value: 'target_value',
+  unit_type: 'unit_type',
   unit: 'unit',
   sleep: 'sleep',
   res_counter: 'res_counter',
   goal_reached: 'goal_reached',
   archived: 'archived',
+  freeze_times: 'freeze_times',
   badge: 'badge',
+  streak: 'streak',
+  streak_history: 'streak_history',
   created_at: 'created_at'
 } as const
 
@@ -883,6 +888,20 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'UNIT_TYPE'
+ */
+export type EnumUNIT_TYPEFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UNIT_TYPE'>
+    
+
+
+/**
+ * Reference to a field of type 'UNIT_TYPE[]'
+ */
+export type ListEnumUNIT_TYPEFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UNIT_TYPE[]'>
     
 
 

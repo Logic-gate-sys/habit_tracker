@@ -10,7 +10,9 @@ declare global{
             },
             query?: {
                 page: string,
-                limit:string,
+                limit: string,
+                hard?: string,
+                permanent?: string
             }
         }
     }

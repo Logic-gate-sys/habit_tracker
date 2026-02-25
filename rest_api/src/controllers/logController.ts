@@ -1,4 +1,3 @@
-import { includes } from "zod";
 import { prisma } from "../config/prisma.ts";
 import type {  Request,Response } from "express";
 
@@ -48,24 +47,70 @@ export async function getLogs(req: Request, res: Response) {
 export async function createLog(req: Request, res: Response) {
     try {
         const { habitId, value, note } = req.body ?? {};
-        const newLog = await prisma.logs.create({
-            data: {
-                habit_id: habitId,
-                value: value,
-                note: note
+        const userId = req.user?.id ?? "";
+        // Use a callback function for transaction to allow logic
+        const result = await prisma.$transaction(async (tx) => {
+            
+            // 1. Check if they already logged TODAY (to prevent streak spam)
+            const existingLog = await tx.logs.findFirst({
+                where: {
+                    habit_id: habitId,
+                    created_at: {
+                        gte: new Date(new Date().setHours(0, 0, 0, 0)) // Start of today
+                    }
+                }
+            });
+
+            // 2. Create the log
+            const newLog = await tx.logs.create({
+                data: { habit_id: habitId, value, note }
+            });
+
+            // 3. Get the habit to check status
+            const habit = await tx.habit.findUnique({
+                where: { id: habitId, user_id: userId }
+            });
+
+            if (!habit) throw new Error("Habit not found");
+
+            // 4. Update the habit based on state
+            // If they already logged today, we don't increment streak again
+            if (!existingLog) {
+                if (habit.sleep) {
+                    // Habit was broken/asleep, wake it up and start at 1
+                    await tx.habit.update({
+                        where: { id: habitId },
+                        data: { 
+                            sleep: false, 
+                            streak: 0,
+                            res_counter: {
+                                increment: 1
+                            } 
+                        }
+                    });
+                } else {
+                    // Normal streak progression
+                    await tx.habit.update({
+                        where: { id: habitId },
+                        data: { streak: { increment: 1 } }
+                    });
+                }
             }
+
+            return newLog;
         });
 
         return res.status(201).json({
-            success:true,
+            success: true,
             message: 'Log created successfully',
-            data: newLog
-        })
-    } catch (err: unknown) {
+            data: result
+        });
+
+    } catch (err: any) {
         return res.status(500).json({
-            error: `Failed to create log for habit`,
+            error: `Failed to create log`,
             details: err.message
-        })
+        });
     }
 }
 
