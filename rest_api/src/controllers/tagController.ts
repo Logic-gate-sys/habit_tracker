@@ -3,10 +3,11 @@ import type {  Request,Response } from "express";
 
 export async function getTags(req: Request, res: Response) {
     try {
+        const userId = req.user?.id; 
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 12;
         const { id } = req.user;
-        const totalTags = await prisma.tag.count();
+        const totalTags = await prisma.tag.count({where: {user_id:userId }});
         if (!totalTags) {
             return res.status(404).json({ error: 'No tags', message: 'You might consider creating some tags' })
         }

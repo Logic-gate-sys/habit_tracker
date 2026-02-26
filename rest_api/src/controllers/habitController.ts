@@ -7,7 +7,7 @@ export async function createHabit(req: Request, res: Response) {
     try {
         const MAX_ACTIVE_HABITS = env.MAX_ACTIVE_HABITS || 10; 
         const { id } = req.user as unknown as string;
-        const { tagId,unitsType , title, description, frequency, targetValue, uint } = req.body; 
+        const { tagId,unitsType , title, description, frequency, targetValue, unit } = req.body; 
         const totalHabits = await prisma.habit.count({where:{archived: false}});
         if (totalHabits >= MAX_ACTIVE_HABITS) {
             return res.status(400).json({
@@ -55,7 +55,7 @@ export async function createHabit(req: Request, res: Response) {
                 description: description,
                 frequency: freq,
                 target_value: targetValue,
-                unit: uint
+                unit: unit
             }
         });
 
@@ -68,7 +68,7 @@ export async function createHabit(req: Request, res: Response) {
         
     } catch (err) {
         return res.status(500).json({
-            error: 'Failed to create habit tag', 
+            error: 'Failed to create habit', 
             details: err.message
         })
     }
@@ -77,9 +77,10 @@ export async function createHabit(req: Request, res: Response) {
 export async function getHabits(req: Request, res: Response) {
     try {
         const page = parseInt(req.query.page) || 1;
+        const userId = req.user?.id
         const limit = parseInt(req.query.limit) || 12;
         const { id } = req.user;
-        const totalHabits = await prisma.habit.count({where:{archived: false}});
+        const totalHabits = await prisma.habit.count({where:{user_id:userId, archived: false}});
         if (!totalHabits) {
             return res.status(404).json({ error: 'No habits', message: 'You might consider creating some habits' })
         }
@@ -128,6 +129,7 @@ export async function getHabits(req: Request, res: Response) {
         })
     }
 }
+
 
 export async function updateHabit(req: Request, res: Response) {
     try {
